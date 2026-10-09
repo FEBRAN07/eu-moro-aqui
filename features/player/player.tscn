@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://features/player/player.gd" id="1"]
+[ext_resource type="Script" path="res://features/player/player_input.gd" id="2"]
+[sub_resource type="CircleShape2D" id="FeetShape"]
+radius = 12.0
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1")
+collision_layer = 1
+collision_mask = 1
+[node name="PlayerInput" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2")
+[node name="Feet" type="CollisionShape2D" parent="."]
+position = Vector2(0, 18)
+shape = SubResource("FeetShape")
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="Hair" type="Polygon2D" parent="Visual"]
+polygon = PackedVector2Array(14, -18, 13.52, -14.38, 12.12, -11, 9.9, -8.1, 7, -5.88, 3.62, -4.48, 0, -4, -3.62, -4.48, -7, -5.88, -9.9, -8.1, -12.12, -11, -13.52, -14.38, -14, -18, -13.52, -21.62, -12.12, -25, -9.9, -27.9, -7, -30.12, -3.62, -31.52, 0, -32, 3.62, -31.52, 7, -30.12, 9.9, -27.9, 12.12, -25, 13.52, -21.62)
+color = Color(0.4902, 0.3137, 0.2431, 1)
+
+[node name="Face" type="Polygon2D" parent="Visual"]
+polygon = PackedVector2Array(10.5, -20, 10.14, -17.28, 9.09, -14.75, 7.42, -12.58, 5.25, -10.91, 2.72, -9.86, 0, -9.5, -2.72, -9.86, -5.25, -10.91, -7.42, -12.58, -9.09, -14.75, -10.14, -17.28, -10.5, -20, -10.14, -22.72, -9.09, -25.25, -7.42, -27.42, -5.25, -29.09, -2.72, -30.14, 0, -30.5, 2.72, -30.14, 5.25, -29.09, 7.42, -27.42, 9.09, -25.25, 10.14, -22.72)
+color = Color(0.9412, 0.7490, 0.5804, 1)
+
+[node name="Shirt" type="Polygon2D" parent="Visual"]
+polygon = PackedVector2Array(-13, -5, 13, -5, 13, 22, -13, 22)
+color = Color(0.2980, 0.5255, 0.7490, 1)
+
+[node name="LeftLeg" type="Polygon2D" parent="Visual"]
+polygon = PackedVector2Array(-12, 22, -6, 22, -6, 35, -12, 35)
+color = Color(0.1686, 0.2314, 0.3451, 1)
+
+[node name="RightLeg" type="Polygon2D" parent="Visual"]
+polygon = PackedVector2Array(6, 22, 12, 22, 12, 35, 6, 35)
+color = Color(0.1686, 0.2314, 0.3451, 1)
+
+[node name="Name" type="Label" parent="."]
+offset_left = -23.0
+offset_top = 38.0
+offset_right = 67.0
+offset_bottom = 66.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1.0000, 1.0000, 1.0000, 1)
+theme_override_font_sizes/font_size = 17
+text = "Você"
+
+[node name="Prompt" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -90.0
+offset_top = -82.0
+offset_right = 160.0
+offset_bottom = -50.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1.0000, 0.9569, 0.7412, 1)
+theme_override_font_sizes/font_size = 16
+text = ""

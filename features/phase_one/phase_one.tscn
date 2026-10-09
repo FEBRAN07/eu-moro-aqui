@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://d4g6qbpdru375"]
+
+[ext_resource type="Script" uid="uid://dagr446qel138" path="res://features/phase_one/phase_one.gd" id="1"]
+[ext_resource type="PackedScene" path="res://features/environments/street.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dol4u1a1u6a1f" path="res://features/environments/house.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://features/player/player.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://features/ui/phase_ui.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://features/ui/transition.tscn" id="6"]
+[ext_resource type="Resource" path="res://features/phase_one/phase_content.tres" id="7"]
+[ext_resource type="PackedScene" uid="uid://by7xdl2jgwjdq" path="res://features/cutscene/cutscene.tscn" id="8"]
+[ext_resource type="Resource" uid="uid://dci2770aob4s8" path="res://features/phase_one/intro_cutscene.tres" id="9_5e4oj"]
+
+[node name="PhaseOne" type="Node2D" unique_id=1434936094]
+script = ExtResource("1")
+content = ExtResource("7")
+
+[node name="Environments" type="Node2D" parent="." unique_id=1238489600]
+
+[node name="Street" parent="Environments" unique_id=173387652 instance=ExtResource("2")]
+unique_name_in_owner = true
+
+[node name="House" parent="Environments" unique_id=1402401504 instance=ExtResource("3")]
+unique_name_in_owner = true
+visible = false
+
+[node name="Player" parent="." unique_id=242852671 instance=ExtResource("4")]
+unique_name_in_owner = true
+position = Vector2(445, 430)
+
+[node name="PhaseUI" parent="." unique_id=1343168815 instance=ExtResource("5")]
+unique_name_in_owner = true
+
+[node name="Transition" parent="." unique_id=1002276073 instance=ExtResource("6")]
+unique_name_in_owner = true
+
+[node name="Cutscene" parent="." unique_id=10595768 instance=ExtResource("8")]
+unique_name_in_owner = true
+preview_data = ExtResource("9_5e4oj")

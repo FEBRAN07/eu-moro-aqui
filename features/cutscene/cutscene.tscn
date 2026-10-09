@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://by7xdl2jgwjdq"]
+
+[ext_resource type="Script" uid="uid://yin8xqigeb78" path="res://features/cutscene/cutscene.gd" id="1"]
+[ext_resource type="Theme" uid="uid://cil6cokxub5ui" path="res://features/ui/phase_theme.tres" id="2"]
+
+[node name="Cutscene" type="CanvasLayer" unique_id=1183324053]
+layer = 15
+script = ExtResource("1")
+
+[node name="Screen" type="Control" parent="." unique_id=1102742704]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2")
+
+[node name="Backdrop" type="ColorRect" parent="Screen" unique_id=467047329]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.08, 0.12, 0.17, 1)
+
+[node name="Background" type="TextureRect" parent="Screen" unique_id=1505697876]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Layout" type="MarginContainer" parent="Screen" unique_id=2055808075]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 28
+
+[node name="Stack" type="VBoxContainer" parent="Screen/Layout" unique_id=1544983356]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 16
+
+[node name="Chapter" type="Label" parent="Screen/Layout/Stack" unique_id=805674780]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.08, 0.12, 0.17, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 24
+text = "Eu Moro Aqui"
+
+[node name="Spacer" type="Control" parent="Screen/Layout/Stack" unique_id=1650041361]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="DialoguePanel" type="PanelContainer" parent="Screen/Layout/Stack" unique_id=2100246844]
+custom_minimum_size = Vector2(0, 224)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Content" type="VBoxContainer" parent="Screen/Layout/Stack/DialoguePanel" unique_id=1770333412]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="Speaker" type="Label" parent="Screen/Layout/Stack/DialoguePanel/Content" unique_id=277247373]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.91, 0.57, 1)
+theme_override_font_sizes/font_size = 26
+text = "Tob"
+
+[node name="Dialogue" type="RichTextLabel" parent="Screen/Layout/Stack/DialoguePanel/Content" unique_id=567838192]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 78)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 23
+text = "O diálogo da cutscene aparece aqui."
+
+[node name="Footer" type="HBoxContainer" parent="Screen/Layout/Stack/DialoguePanel/Content" unique_id=829850171]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="Hint" type="Label" parent="Screen/Layout/Stack/DialoguePanel/Content/Footer" unique_id=337469006]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 15
+text = "Espaço / Enter / E ou clique para avançar"
+
+[node name="Progress" type="Label" parent="Screen/Layout/Stack/DialoguePanel/Content/Footer" unique_id=136579869]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "1 / 4"
+
+[node name="NextButton" type="Button" parent="Screen/Layout/Stack/DialoguePanel/Content/Footer" unique_id=244163536]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(170, 44)
+layout_mode = 2
+text = "Continuar"
+
+[connection signal="gui_input" from="Screen" to="." method="_on_screen_gui_input"]

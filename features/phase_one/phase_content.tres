@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EMAPhaseContent" load_steps=3 format=3]
+[ext_resource type="Script" path="res://features/phase_one/phase_content.gd" id="1"]
+[ext_resource type="Resource" path="res://features/phase_one/intro_cutscene.tres" id="2"]
+[resource]
+script = ExtResource("1")
+intro_cutscene = ExtResource("2")
+bad_choice = "Restos de comida humana podem ter cebola, alho, sal e temperos que fazem mal aos cães. Prefira ração e água fresca."
+food_choice = "Agora volte até Tob. Você também pode procurar água fresca para completar o cuidado."
+water_choice = "Muito bem! Água limpa é tão importante quanto a comida. Não esqueça de pegar ração antes de voltar até Tob."
+good_result = "Você levou ração adequada. Água fresca teria deixado esse cuidado ainda melhor. Tob agradece sua ajuda!"
+best_result = "Você levou ração adequada e água fresca. Tob recebe tudo de que precisa agora. Cada cuidado responsável fortalece a confiança dele!"

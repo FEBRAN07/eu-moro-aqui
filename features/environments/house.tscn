@@ -1,0 +1,138 @@
+[gd_scene format=3 uid="uid://dol4u1a1u6a1f"]
+
+[ext_resource type="Script" uid="uid://b4c3n2x4xyng2" path="res://features/environments/environment.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://b7ep4gt5ln7fi" path="res://features/interaction/interactable.tscn" id="2"]
+[ext_resource type="Texture2D" path="res://assets/pets/food_bowl.tres" id="3"]
+[ext_resource type="Texture2D" path="res://assets/pets/water_bowl.tres" id="4"]
+[ext_resource type="Texture2D" path="res://assets/food/cooked_beef.png" id="5"]
+
+[node name="House" type="Node2D" unique_id=223409771]
+script = ExtResource("1")
+display_name = "Casa"
+walk_bounds = Rect2(60, 125, 750, 485)
+
+[node name="Spawn" type="Marker2D" parent="." unique_id=751313743]
+unique_name_in_owner = true
+position = Vector2(415, 420)
+
+[node name="Scenery" type="Node2D" parent="." unique_id=1693584430]
+
+[node name="Background" type="Polygon2D" parent="Scenery" unique_id=65101261]
+color = Color(0.2392, 0.3216, 0.3843, 1)
+polygon = PackedVector2Array(0, 0, 890, 0, 890, 648, 0, 648)
+
+[node name="Floor" type="Polygon2D" parent="Scenery" unique_id=176114378]
+color = Color(0.9451, 0.8392, 0.6588, 1)
+polygon = PackedVector2Array(42, 102, 830, 102, 830, 345.1546, 830, 602, 42, 602)
+
+[node name="NorthWall" type="Polygon2D" parent="Scenery" unique_id=1444599491]
+color = Color(0.8196, 0.4784, 0.3843, 1)
+polygon = PackedVector2Array(42, 102, 830, 102, 830, 146, 42, 146)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Scenery/NorthWall" unique_id=2052659429]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Scenery/NorthWall/StaticBody2D" unique_id=1132697475]
+polygon = PackedVector2Array(40, 104, 40, 144, 832, 144, 832, 104)
+
+[node name="SouthWall" type="Polygon2D" parent="Scenery" unique_id=1501308052]
+color = Color(0.7216, 0.4706, 0.3216, 1)
+polygon = PackedVector2Array(42, 540, 830, 540, 830, 602, 42, 602)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Scenery/SouthWall" unique_id=1555919618]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Scenery/SouthWall/StaticBody2D" unique_id=928624290]
+position = Vector2(0.37423706, -13.116882)
+scale = Vector2(1.001894, 1.0208337)
+polygon = PackedVector2Array(40, 536, 40, 608, 832, 608, 832, 544)
+
+[node name="Kitchen" type="Polygon2D" parent="Scenery" unique_id=1199440373]
+color = Color(0.9059, 0.7412, 0.5255, 1)
+polygon = PackedVector2Array(93, 162, 605, 162, 605, 314, 93, 314)
+
+[node name="Counter" type="Polygon2D" parent="Scenery" unique_id=323265322]
+color = Color(0.6431, 0.4157, 0.302, 1)
+polygon = PackedVector2Array(82, 310, 617, 310, 617, 348, 82, 348)
+
+[node name="Fridge" type="Polygon2D" parent="Scenery" unique_id=391335265]
+color = Color(0.7569, 0.8549, 0.8863, 1)
+polygon = PackedVector2Array(633, 166, 770, 166, 770, 421, 633, 421)
+
+[node name="FridgeDoor" type="Polygon2D" parent="Scenery" unique_id=946618558]
+color = Color(0.5294, 0.7098, 0.7765, 1)
+polygon = PackedVector2Array(650, 185, 754, 185, 754, 372, 650, 372)
+
+[node name="ExitDoor" type="Polygon2D" parent="Scenery" unique_id=559707857]
+color = Color(0.4745, 0.302, 0.2314, 1)
+polygon = PackedVector2Array(360, 458, 470, 458, 470, 540, 360, 540)
+
+[node name="KitchenLabel" type="Label" parent="Scenery" unique_id=1514453292]
+offset_left = 104.0
+offset_top = 162.0
+offset_right = 304.0
+offset_bottom = 194.0
+theme_override_colors/font_color = Color(0.4431, 0.2941, 0.2235, 1)
+theme_override_font_sizes/font_size = 18
+text = "COZINHA"
+
+[node name="Interactions" type="Node2D" parent="." unique_id=863503712]
+unique_name_in_owner = true
+
+[node name="Door" parent="Interactions" unique_id=756533460 instance=ExtResource("2")]
+position = Vector2(415, 500)
+action_id = &"door"
+title = "Sair para a rua"
+
+[node name="Leftovers" parent="Interactions" unique_id=1657002823 instance=ExtResource("2")]
+position = Vector2(184, 244)
+action_id = &"leftovers"
+title = "Restos de comida"
+
+[node name="Outline" parent="Interactions/Leftovers"]
+visible = false
+
+[node name="Token" parent="Interactions/Leftovers"]
+visible = false
+
+[node name="Icon" parent="Interactions/Leftovers"]
+visible = false
+
+[node name="FoodSprite" type="Sprite2D" parent="Interactions/Leftovers"]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("5")
+
+[node name="Food" parent="Interactions" unique_id=773831108 instance=ExtResource("2")]
+position = Vector2(318, 244)
+
+[node name="Outline" parent="Interactions/Food"]
+visible = false
+
+[node name="Token" parent="Interactions/Food"]
+visible = false
+
+[node name="Icon" parent="Interactions/Food"]
+visible = false
+
+[node name="Bowl" type="Sprite2D" parent="Interactions/Food"]
+texture_filter = 1
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3")
+
+[node name="Water" parent="Interactions" unique_id=543779836 instance=ExtResource("2")]
+position = Vector2(452, 244)
+action_id = &"water"
+title = "Água fresca"
+
+[node name="Outline" parent="Interactions/Water"]
+visible = false
+
+[node name="Token" parent="Interactions/Water"]
+visible = false
+
+[node name="Icon" parent="Interactions/Water"]
+visible = false
+
+[node name="Bowl" type="Sprite2D" parent="Interactions/Water"]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("4")

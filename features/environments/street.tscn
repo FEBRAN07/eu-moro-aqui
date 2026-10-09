@@ -1,0 +1,106 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://features/environments/environment.gd" id="1"]
+[ext_resource type="PackedScene" path="res://features/interaction/interactable.tscn" id="2"]
+[node name="Street" type="Node2D"]
+script = ExtResource("1")
+display_name = "Rua"
+[node name="Spawn" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(317, 410)
+[node name="Scenery" type="Node2D" parent="."]
+
+[node name="Sky" type="Polygon2D" parent="Scenery"]
+polygon = PackedVector2Array(0, 0, 890, 0, 890, 648, 0, 648)
+color = Color(0.6588, 0.8510, 0.9412, 1)
+
+[node name="Grass" type="Polygon2D" parent="Scenery"]
+polygon = PackedVector2Array(0, 88, 870, 88, 870, 648, 0, 648)
+color = Color(0.6196, 0.8588, 0.5686, 1)
+
+[node name="Road" type="Polygon2D" parent="Scenery"]
+polygon = PackedVector2Array(0, 445, 870, 445, 870, 648, 0, 648)
+color = Color(0.3255, 0.3529, 0.3882, 1)
+
+[node name="RoadLine" type="Polygon2D" parent="Scenery"]
+polygon = PackedVector2Array(0, 534, 870, 534, 870, 541, 0, 541)
+color = Color(0.9451, 0.8392, 0.4275, 1)
+
+[node name="Facade" type="Polygon2D" parent="Scenery"]
+polygon = PackedVector2Array(68, 116, 588, 116, 588, 362, 68, 362)
+color = Color(0.9529, 0.8431, 0.6824, 1)
+
+[node name="Body" type="StaticBody2D" parent="Scenery/Facade"]
+collision_mask = 0
+
+[node name="Collision" type="CollisionPolygon2D" parent="Scenery/Facade/Body"]
+polygon = PackedVector2Array(68, 116, 588, 116, 588, 362, 68, 362)
+
+[node name="Roof" type="Polygon2D" parent="Scenery"]
+polygon = PackedVector2Array(45, 116, 330, 38, 615, 116)
+color = Color(0.7882, 0.4039, 0.3333, 1)
+
+[node name="Body" type="StaticBody2D" parent="Scenery/Roof"]
+collision_mask = 0
+
+[node name="Collision" type="CollisionPolygon2D" parent="Scenery/Roof/Body"]
+polygon = PackedVector2Array(45, 116, 330, 38, 615, 116)
+
+[node name="FrontDoor" type="Polygon2D" parent="Scenery"]
+polygon = PackedVector2Array(275, 280, 359, 280, 359, 362, 275, 362)
+color = Color(0.5451, 0.3765, 0.3020, 1)
+
+[node name="LeftWindow" type="Polygon2D" parent="Scenery"]
+polygon = PackedVector2Array(94, 143, 204, 143, 204, 243, 94, 243)
+color = Color(0.5294, 0.7098, 0.7765, 1)
+
+[node name="RightWindow" type="Polygon2D" parent="Scenery"]
+polygon = PackedVector2Array(400, 143, 510, 143, 510, 243, 400, 243)
+color = Color(0.5294, 0.7098, 0.7765, 1)
+
+[node name="Pole" type="Polygon2D" parent="Scenery"]
+polygon = PackedVector2Array(700, 184, 717, 184, 717, 441, 700, 441)
+color = Color(0.3961, 0.4471, 0.4824, 1)
+
+[node name="Lamp" type="Polygon2D" parent="Scenery"]
+polygon = PackedVector2Array(734, 178, 733.11, 184.73, 730.52, 191, 726.38, 196.38, 721, 200.52, 714.73, 203.11, 708, 204, 701.27, 203.11, 695, 200.52, 689.62, 196.38, 685.48, 191, 682.89, 184.73, 682, 178, 682.89, 171.27, 685.48, 165, 689.62, 159.62, 695, 155.48, 701.27, 152.89, 708, 152, 714.73, 152.89, 721, 155.48, 726.38, 159.62, 730.52, 165, 733.11, 171.27)
+color = Color(1.0000, 0.9137, 0.5686, 1)
+
+[node name="Interactions" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Door" parent="Interactions" instance=ExtResource("2")]
+position = Vector2(317, 346)
+action_id = &"door"
+title = "Entrar na casa"
+
+[node name="Tob" parent="Interactions" instance=ExtResource("2")]
+position = Vector2(720, 440)
+action_id = &"tob"
+title = "Falar com Tob"
+
+[node name="Outline" parent="Interactions/Tob"]
+visible = false
+[node name="Token" parent="Interactions/Tob"]
+visible = false
+[node name="Icon" parent="Interactions/Tob"]
+visible = false
+
+[node name="Body" type="Polygon2D" parent="Interactions/Tob"]
+polygon = PackedVector2Array(42, 0, 40.57, 6.73, 36.37, 13, 29.7, 18.38, 21, 22.52, 10.87, 25.11, 0, 26, -10.87, 25.11, -21, 22.52, -29.7, 18.38, -36.37, 13, -40.57, 6.73, -42, 0, -40.57, -6.73, -36.37, -13, -29.7, -18.38, -21, -22.52, -10.87, -25.11, 0, -26, 10.87, -25.11, 21, -22.52, 29.7, -18.38, 36.37, -13, 40.57, -6.73)
+color = Color(0.7176, 0.4824, 0.3098, 1)
+
+[node name="Head" type="Polygon2D" parent="Interactions/Tob"]
+polygon = PackedVector2Array(-8, -16, -8.65, -11.08, -10.55, -6.5, -13.56, -2.56, -17.5, 0.45, -22.08, 2.35, -27, 3, -31.92, 2.35, -36.5, 0.45, -40.44, -2.56, -43.45, -6.5, -45.35, -11.08, -46, -16, -45.35, -20.92, -43.45, -25.5, -40.44, -29.44, -36.5, -32.45, -31.92, -34.35, -27, -35, -22.08, -34.35, -17.5, -32.45, -13.56, -29.44, -10.55, -25.5, -8.65, -20.92)
+color = Color(0.7804, 0.5451, 0.3608, 1)
+
+[node name="Nose" type="Polygon2D" parent="Interactions/Tob"]
+polygon = PackedVector2Array(-39, -17, -39.1, -16.22, -39.4, -15.5, -39.88, -14.88, -40.5, -14.4, -41.22, -14.1, -42, -14, -42.78, -14.1, -43.5, -14.4, -44.12, -14.88, -44.6, -15.5, -44.9, -16.22, -45, -17, -44.9, -17.78, -44.6, -18.5, -44.12, -19.12, -43.5, -19.6, -42.78, -19.9, -42, -20, -41.22, -19.9, -40.5, -19.6, -39.88, -19.12, -39.4, -18.5, -39.1, -17.78)
+color = Color(0.1569, 0.1686, 0.1961, 1)
+
+[node name="Eye" type="Polygon2D" parent="Interactions/Tob"]
+polygon = PackedVector2Array(-25.6, -25, -25.68, -24.38, -25.92, -23.8, -26.3, -23.3, -26.8, -22.92, -27.38, -22.68, -28, -22.6, -28.62, -22.68, -29.2, -22.92, -29.7, -23.3, -30.08, -23.8, -30.32, -24.38, -30.4, -25, -30.32, -25.62, -30.08, -26.2, -29.7, -26.7, -29.2, -27.08, -28.62, -27.32, -28, -27.4, -27.38, -27.32, -26.8, -27.08, -26.3, -26.7, -25.92, -26.2, -25.68, -25.62)
+color = Color(0.1569, 0.1686, 0.1961, 1)
+
+[node name="Tail" type="Polygon2D" parent="Interactions/Tob"]
+polygon = PackedVector2Array(29, -4, 54, -23, 50, -29, 28, -11)
+color = Color(0.7176, 0.4824, 0.3098, 1)

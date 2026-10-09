@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://b7ep4gt5ln7fi"]
+
+[ext_resource type="Script" uid="uid://dhju1xo7kqy7i" path="res://features/interaction/interactable.gd" id="1"]
+
+[node name="Interactable" type="Node2D" unique_id=577017939]
+script = ExtResource("1")
+
+[node name="Outline" type="Polygon2D" parent="." unique_id=1686473081]
+color = Color(0.8275, 0.2824, 0.2824, 1)
+polygon = PackedVector2Array(33, 0, 31.88, 8.54, 28.58, 16.5, 23.33, 23.33, 16.5, 28.58, 8.54, 31.88, 0, 33, -8.54, 31.88, -16.5, 28.58, -23.33, 23.33, -28.58, 16.5, -31.88, 8.54, -33, 0, -31.88, -8.54, -28.58, -16.5, -23.33, -23.33, -16.5, -28.58, -8.54, -31.88, 0, -33, 8.54, -31.88, 16.5, -28.58, 23.33, -23.33, 28.58, -16.5, 31.88, -8.54)
+
+[node name="Token" type="Polygon2D" parent="." unique_id=318264976]
+color = Color(0.9686, 0.9412, 0.8471, 1)
+polygon = PackedVector2Array(28, 0, 27.05, 7.25, 24.25, 14, 19.8, 19.8, 14, 24.25, 7.25, 27.05, 0, 28, -7.25, 27.05, -14, 24.25, -19.8, 19.8, -24.25, 14, -27.05, 7.25, -28, 0, -27.05, -7.25, -24.25, -14, -19.8, -19.8, -14, -24.25, -7.25, -27.05, 0, -28, 7.25, -27.05, 14, -24.25, 19.8, -19.8, 24.25, -14, 27.05, -7.25)
+
+[node name="Icon" type="Label" parent="." unique_id=1709727475]
+offset_left = -9.0
+offset_top = -17.0
+offset_right = 19.0
+offset_bottom = 15.0
+theme_override_colors/font_color = Color(0.1922, 0.3451, 0.4078, 1)
+theme_override_font_sizes/font_size = 24
+text = "●"
+
+[node name="Title" type="Label" parent="." unique_id=241891430]
+unique_name_in_owner = true
+offset_left = -75.0
+offset_top = 39.0
+offset_right = 105.0
+offset_bottom = 69.0
+theme_override_colors/font_color = Color(0.2902, 0.1882, 0.1412, 1)
+theme_override_font_sizes/font_size = 14
+text = "Pote de ração"
+
+[node name="Indicator" type="Label" parent="." unique_id=1747317679]
+unique_name_in_owner = true
+offset_left = -6.0
+offset_top = -69.0
+offset_right = 14.0
+offset_bottom = -39.0
+theme_override_colors/font_color = Color(0.7804, 0.1725, 0.1922, 1)
+theme_override_font_sizes/font_size = 25
+text = "!"

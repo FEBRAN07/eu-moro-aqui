@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://dnffbntl0ea3p"]
+
+[ext_resource type="Script" uid="uid://b0lpp30lxejge" path="res://features/ui/phase_ui.gd" id="1"]
+[ext_resource type="Theme" uid="uid://cil6cokxub5ui" path="res://features/ui/phase_theme.tres" id="2"]
+
+[node name="PhaseUI" type="CanvasLayer" unique_id=954678172]
+layer = 10
+script = ExtResource("1")
+
+[node name="Root" type="Control" parent="." unique_id=146561412]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("2")
+
+[node name="Sidebar" type="PanelContainer" parent="Root" unique_id=1514085288]
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -262.0
+mouse_filter = 2
+
+[node name="Info" type="VBoxContainer" parent="Root/Sidebar" unique_id=1965929485]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="PhaseTitle" type="Label" parent="Root/Sidebar/Info" unique_id=1426165590]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.91, 0.57, 1)
+text = "FASE 1"
+
+[node name="Location" type="Label" parent="Root/Sidebar/Info" unique_id=735480029]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Local: Rua"
+
+[node name="Objective" type="Label" parent="Root/Sidebar/Info" unique_id=1181044261]
+layout_mode = 2
+text = "Objetivo:
+Alimente Tob."
+
+[node name="AffectionTitle" type="Label" parent="Root/Sidebar/Info" unique_id=347384461]
+layout_mode = 2
+text = "AFETO DE TOB"
+
+[node name="Hearts" type="Label" parent="Root/Sidebar/Info" unique_id=1567348839]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.36, 0.44, 1)
+theme_override_font_sizes/font_size = 44
+text = "♡   ♡"
+
+[node name="Inventory" type="Label" parent="Root/Sidebar/Info" unique_id=808119689]
+unique_name_in_owner = true
+layout_mode = 2
+text = "LEVANDO
+Sem ração
+Sem água"
+
+[node name="Hint" type="Label" parent="Root/Sidebar/Info" unique_id=2101752086]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Cada cuidado responsável fortalece a confiança de Tob."
+autowrap_mode = 3
+
+[node name="Spacer" type="Control" parent="Root/Sidebar/Info" unique_id=617704836]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Controls" type="Label" parent="Root/Sidebar/Info" unique_id=96429303]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "CONTROLES
+WASD / setas: mover
+E / clique: interagir"
+
+[node name="Modal" type="PanelContainer" parent="Root" unique_id=13174197]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 76.0
+offset_top = 365.0
+offset_right = 814.0
+offset_bottom = 622.0
+mouse_filter = 2
+
+[node name="Content" type="VBoxContainer" parent="Root/Modal" unique_id=318884175]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Heading" type="Label" parent="Root/Modal/Content" unique_id=46594812]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.91, 0.57, 1)
+theme_override_font_sizes/font_size = 25
+text = "TOB"
+autowrap_mode = 3
+
+[node name="Body" type="Label" parent="Root/Modal/Content" unique_id=524298582]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 21
+text = "Oi. Meu nome é Tob."
+autowrap_mode = 3
+
+[node name="NextButton" type="Button" parent="Root/Modal/Content" unique_id=1278729632]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Continuar"
