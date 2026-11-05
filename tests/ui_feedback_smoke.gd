@@ -1,5 +1,7 @@
 extends SceneTree
 var _failed := false
+var _selected: StringName = &""
+var _selection_count := 0
 
 func _initialize() -> void:
 	call_deferred("_run")
@@ -10,6 +12,8 @@ func _check(condition: bool, message: String) -> void:
 		push_error(message)
 
 func _run() -> void:
+	# Headless windows default to 64x64; GUI hit tests need the intended viewport.
+	root.size = Vector2i(1152, 648)
 	var ui := (load("res://features/ui/phase_ui.tscn") as PackedScene).instantiate() as EMAPhaseUI
 	root.add_child(ui)
 	await process_frame
@@ -28,8 +32,39 @@ func _run() -> void:
 	ui.show_message("Correto", "Outra mensagem.", "Continuar", EMAPhaseUI.Feedback.SUCCESS)
 	ui.hide_message()
 	_check(not ui.modal.visible and ui.modal.theme_type_variation == &"", "Hiding a message must reset its style.")
+	ui.choice_selected.connect(func(id: StringName) -> void:
+		_selected = id
+		_selection_count += 1)
+	ui.show_choices("Escolha", "Uma ação por vez.", [{"id": &"play", "text": "Brincar"}, {"id": &"cancel", "text": "Voltar"}])
+	await process_frame
+	await process_frame
+	_check(not ui.next_button.visible and ui.choice_buttons[0].has_focus(), "Choice menu must focus its first option and hide generic advance.")
+	for pressed: bool in [true, false]:
+		var key := InputEventKey.new()
+		key.physical_keycode = KEY_ENTER
+		key.keycode = KEY_ENTER
+		key.pressed = pressed
+		root.push_input(key)
+	_check(_selected == &"play" and _selection_count == 1 and not ui.modal.visible, "Keyboard must select exactly one choice and close the menu.")
+	ui.show_choices("Escolha", "Outra ação.", [{"id": &"play", "text": "Brincar"}, {"id": &"cancel", "text": "Voltar"}])
+	await process_frame
+	await process_frame
+	var point := ui.choice_buttons[1].get_global_rect().get_center()
+	var motion := InputEventMouseMotion.new()
+	motion.position = point
+	motion.global_position = point
+	root.push_input(motion)
+	await process_frame
+	for pressed: bool in [true, false]:
+		var click := InputEventMouseButton.new()
+		click.button_index = MOUSE_BUTTON_LEFT
+		click.position = point
+		click.global_position = point
+		click.pressed = pressed
+		root.push_input(click)
+	_check(_selected == &"cancel" and _selection_count == 2, "Mouse must select the requested option without double activation (selected=%s, count=%d, point=%s)." % [_selected, _selection_count, point])
 	ui.queue_free()
 	await process_frame
 	if not _failed:
-		print("PASS: green/red feedback styles, neutral reset and shared theme isolation.")
+		print("PASS: green/red feedback styles, neutral reset, shared theme isolation and keyboard/mouse choices.")
 	quit(1 if _failed else 0)

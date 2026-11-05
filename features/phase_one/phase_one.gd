@@ -2,6 +2,9 @@ extends Node2D
 ## Owns phase progress. Scenes own movement, visuals, input and transitions.
 signal affection_changed(total: int)
 signal phase_completed(affection: int)
+signal next_phase_requested
+@export var continue_on_complete := false
+@export var completion_button_text := "Jogar novamente"
 
 enum State { INTRO, STARTING_GAMEPLAY, EXPLORE, FEEDBACK, COMPLETE }
 @export var content: EMAPhaseContent
@@ -70,7 +73,10 @@ func _advance() -> void:
 		State.FEEDBACK:
 			_resume_exploration()
 		State.COMPLETE:
-			_restart()
+			if continue_on_complete:
+				next_phase_requested.emit()
+			else:
+				_restart()
 
 func _interact() -> void:
 	if state != State.EXPLORE or transition.busy:
@@ -110,7 +116,7 @@ func _complete() -> void:
 	player.set_enabled(false)
 	affection_changed.emit(affection)
 	phase_completed.emit(affection)
-	ui.show_message("Fase concluída! +%d coração%s" % [affection, "s" if affection == 2 else ""], content.best_result if has_water else content.good_result, "Jogar novamente", EMAPhaseUI.Feedback.SUCCESS)
+	ui.show_message("Fase concluída! +%d coração%s" % [affection, "s" if affection == 2 else ""], content.best_result if has_water else content.good_result, completion_button_text, EMAPhaseUI.Feedback.SUCCESS)
 
 func _set_area(area: EMAEnvironment) -> void:
 	_active_area = area

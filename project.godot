@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Eu Moro Aqui — Protótipo"
-run/main_scene="res://features/phase_one/phase_one.tscn"
+run/main_scene="res://features/campaign/campaign.tscn"
 config/features=PackedStringArray("4.7")
 
 [display]

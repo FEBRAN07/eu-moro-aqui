@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EMAPhaseTwoContent" load_steps=3 format=3]
+[ext_resource type="Script" path="res://features/phase_two/phase_content.gd" id="1"]
+[ext_resource type="Resource" path="res://features/phase_two/intro_cutscene.tres" id="2"]
+[resource]
+script = ExtResource("1")
+intro_cutscene = ExtResource("2")
+bad_choice = "Quando um cachorro abana o rabo e pula, ele está feliz e quer brincar. Ignorá-lo ou bater o pé assusta o animal."
+stick_result = "Você jogou um graveto pela janela para Tob brincar. Ele ficou animado! Brincar junto e dedicar tempo a ele fortaleceria ainda mais a amizade."
+together_result = "Você correu com Tob pela praça, fez carinho e recebeu lambeijos. Vocês passaram um tempo juntos! Atenção, companhia e brincadeiras gentis também fazem parte do cuidado."

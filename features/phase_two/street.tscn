@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="PackedScene" path="res://features/environments/street.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://features/interaction/interactable.tscn" id="2"]
+[node name="Street" instance=ExtResource("1")]
+[node name="PlazaGate" parent="Interactions" instance=ExtResource("2")]
+position = Vector2(560, 570)
+action_id = &"plaza"
+title = "Ir à praça"

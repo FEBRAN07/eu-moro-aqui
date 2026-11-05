@@ -32,7 +32,8 @@ func _run() -> void:
 	var second := EMACutsceneLine.new()
 	second.speaker = "Criança"
 	second.text = "Vamos ajudar!"
-	second.background = load("res://features/cutscene/art/tob_street.svg")
+	# Use a self-contained fixture: the game's placeholder art can be replaced.
+	second.background = GradientTexture2D.new()
 	data.lines.assign([first, second])
 	presenter.play(data)
 	await process_frame

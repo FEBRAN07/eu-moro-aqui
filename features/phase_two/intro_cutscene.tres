@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EMACutsceneData" load_steps=8 format=3]
+[ext_resource type="Script" path="res://features/cutscene/cutscene_data.gd" id="1"]
+[ext_resource type="Script" path="res://features/cutscene/cutscene_line.gd" id="2"]
+[ext_resource type="Texture2D" path="res://features/cutscene/art/tob_triste_sol.png" id="3"]
+[sub_resource type="Resource" id="Line1"]
+script = ExtResource("2")
+text = "Hummm estava muito boa essa comida. Ela tem tudo o que eu preciso para me manter vivo e forte, para correr, pular e brincar."
+[sub_resource type="Resource" id="Line2"]
+script = ExtResource("2")
+text = "Sabe, minha mãe e eu adorávamos brincar um com o outro. Ela me ensinou que quando a gente está brincando tem que morder de leve, sem força... Outra coisa que mamãe me ensinou é que não podemos morder nos olhos, pois isso pode ser machucar pra valer."
+[sub_resource type="Resource" id="Line3"]
+script = ExtResource("2")
+text = "Era maravilhoso brincar com minha mãe! Sinto muito falta dela."
+[sub_resource type="Resource" id="Line4"]
+script = ExtResource("2")
+text = "Queria tanto brincar com alguém... me sinto tão sozinho e triste... Será que você pode brincar comigo?"
+[resource]
+script = ExtResource("1")
+title = "Eu Moro Aqui · Fase 2 — Brinque com Tob"
+background = ExtResource("3")
+lines = Array[ExtResource("2")]([SubResource("Line1"), SubResource("Line2"), SubResource("Line3"), SubResource("Line4")])

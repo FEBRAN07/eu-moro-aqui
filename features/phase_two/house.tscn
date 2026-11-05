@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="PackedScene" path="res://features/environments/house.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://features/interaction/interactable.tscn" id="2"]
+[node name="House" instance=ExtResource("1")]
+[node name="Leftovers" parent="Interactions"]
+visible = false
+[node name="Food" parent="Interactions"]
+visible = false
+[node name="Water" parent="Interactions"]
+visible = false
+[node name="Window" type="Polygon2D" parent="Scenery"]
+polygon = PackedVector2Array(220, 175, 540, 175, 540, 290, 220, 290)
+color = Color(0.55, 0.78, 0.87, 1)
+[node name="WindowFrame" type="Line2D" parent="Scenery"]
+points = PackedVector2Array(220, 175, 540, 175, 540, 290, 220, 290, 220, 175, 380, 175, 380, 290)
+width = 7.0
+default_color = Color(0.95, 0.89, 0.72, 1)
+[node name="Stick" type="Line2D" parent="Scenery"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(360, 260)
+points = PackedVector2Array(-22, 7, 20, -7, 9, -3, 8, -12)
+width = 5.0
+default_color = Color(0.35, 0.19, 0.10, 1)
+[node name="WindowAction" parent="Interactions" instance=ExtResource("2")]
+position = Vector2(360, 320)
+action_id = &"stick"
+title = "Jogar graveto pela janela"

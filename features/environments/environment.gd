@@ -14,11 +14,16 @@ func set_active(value: bool) -> void:
 
 func target_at(point: Vector2) -> EMAInteractable:
 	# Scene children are the source of truth for positions and interaction ids.
+	var nearest: EMAInteractable
+	var nearest_distance := INF
 	for child in interactions.get_children():
 		var target := child as EMAInteractable
-		if target and target.is_near(point):
-			return target
-	return null
+		if target and target.visible and target.is_near(point):
+			var distance := target.global_position.distance_squared_to(point)
+			if distance < nearest_distance:
+				nearest = target
+				nearest_distance = distance
+	return nearest
 
 func set_item_available(id: StringName, value: bool) -> void:
 	for child in interactions.get_children():

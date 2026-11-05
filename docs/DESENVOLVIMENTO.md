@@ -1,6 +1,6 @@
 # Processo e padrão de desenvolvimento — Eu Moro Aqui
 
-Este documento registra o trabalho realizado no protótipo da fase 1 e define
+Este documento registra o trabalho realizado no protótipo das fases 1 e 2 e define
 um fluxo para as próximas alterações. Descreve o estado atual do projeto;
 recomendações futuras não significam funcionalidades já implementadas.
 
@@ -144,7 +144,7 @@ uma cena inteira para uma mudança pontual nem desfazer ajustes não relacionado
 
 ## 6. Padrão de narrativa e novas fases
 
-O fluxo atual é:
+O fluxo da fase 1, executada isoladamente, é:
 
 ```text
 INTRO → STARTING_GAMEPLAY (fade) → EXPLORE ⇄ FEEDBACK → COMPLETE
@@ -174,10 +174,51 @@ Para visualizar a introdução atual isoladamente, abrir
 `features/phase_one/intro_preview.tscn` e executar F6. Para outra introdução,
 atribuir seus dados a `preview_data` de uma instância de cutscene.
 
-**Limite atual:** ainda não existe um gerenciador de cinco fases, salvamento,
-inventário genérico ou controlador universal. O HUD contém textos da fase 1;
-algumas falas e a posição inicial do jogador ainda estão no controlador. Ao
-ampliar o jogo, parametrizar essas diferenças conforme a necessidade real.
+### Fase 2 e sequência da campanha
+
+`features/campaign/campaign.tscn` agora é a cena principal (F5). Seu controlador
+mantém a sequência das duas fases e o afeto acumulado durante a sessão, sem
+autoload. As cenas das fases continuam independentes para F6; na campanha,
+`continue_on_complete` e `completion_button_text` configuram a ação de conclusão.
+`next_phase_requested` solicita a troca. A transição da campanha usa layer 30,
+acima dos fades internos das fases, e bloqueia input enquanto troca instâncias.
+O afeto é registrado no signal de conclusão, sem acumular mensagens repetidas.
+
+Na fase 2, o controlador mantém estados exclusivos para introdução, transição,
+exploração, escolha, feedback, brincadeira, arremesso e conclusão. A cutscene tem
+as quatro falas exatamente como solicitadas, inclusive as expressões gramaticais
+do texto original, e referencia a mesma imagem da fase 1. O Resource
+`features/phase_two/phase_content.tres` contém o feedback e os resultados.
+
+- Bater o pé: menu ao interagir com Tob, alerta sonoro provisório e orientação
+  literal do GDD; não encerra a fase nem concede afeto.
+- Graveto: entrar na casa, interagir com a janela e aguardar a animação simples
+  do arremesso; concede um coração.
+- Companhia: correr pela praça com Tob, visitar três marcadores em ordem e
+  depois fazer carinho; concede dois corações. O resultado narrativo representa
+  também os lambeijos e o tempo juntos, sem animação específica de carinho.
+
+A praça é uma cena separada, com percurso editável em `Route/Point1..Point3`.
+O componente opcional `EMAFollowComponent` move um ator em direção a um alvo
+configurado, sem acessar progresso, UI ou controlador. O progresso do percurso
+permanece ao sair/voltar à praça e não é atualizado durante diálogos ou fades.
+Visuais da praça/janela/graveto e o áudio são placeholders.
+
+Rua e casa da fase 2 reutilizam as cenas existentes por herança de cena, sem
+copiar todo o cenário. Itens de alimentação estão ocultos e não interagem nessa
+fase. `EMAEnvironment.target_at()` ignora objetos ocultos e escolhe o mais próximo
+entre os disponíveis, para Tob não encobrir interações como a saída da praça.
+
+O HUD oferece `configure_phase()` e `update_overview()` para conteúdo de outras
+fases, além de `show_choices()` com até três botões editáveis na cena. As escolhas
+emitem `choice_selected(id)`; o controlador decide o efeito. Avançar uma mensagem
+não pula um menu de escolhas. Fala educativa e classificação de cores permanecem
+independentes do widget que as apresenta.
+
+**Limite atual:** as fases 3–5 ainda não foram implementadas. Não há salvamento
+persistente, inventário genérico ou controlador universal. As fases compartilham
+componentes concretos; suas regras e parte do ciclo de vida permanecem em
+controladores próprios. Algumas falas e posições iniciais ainda estão em scripts.
 
 ## 7. Padrão de integração de assets
 
@@ -218,6 +259,26 @@ foram ocultados, preservando `action_id = &"leftovers"`, posição, título, ind
 e orientação educativa, sem conceder ração ou afeto.
 Detalhes de origem e licença pendente estão no [README do asset](../assets/food/README.md).
 
+### Tob como cena reutilizável
+
+`features/tob/tob.tscn` especializa a cena de interação existente e reúne o
+visual, o título, o indicador e o identificador `tob`. A rua instancia essa
+cena em `Interactions/Tob`, mantendo a posição e o contrato de proximidade.
+As regras de alimentação e afeto continuam no controlador da fase; Tob não
+conhece o HUD ou os dados da fase 1.
+
+A spritesheet fornecida `Dogs-Remastered-12.png` foi copiada para `assets/dogs/`.
+O Resource `tob_idle.tres` recorta a primeira linha em oito células de 64 × 48;
+um `AnimatedSprite2D` reproduz a sequência em pé a 6 FPS com escala 2 × e
+filtro nearest. Não foram introduzidos movimento, IA ou novas regras.
+
+Nas próximas fases, instanciar `tob.tscn` sob `Interactions` do ambiente para
+reutilizar a descoberta por proximidade. Alterar a aparência na cena de Tob e
+as animações no SpriteFrames, sem duplicar seu visual dentro de cada cenário.
+Abrir `tob.tscn` com F6 permite inspecionar a animação sem carregar uma fase.
+A arte das cutscenes é independente e não foi substituída por esta alteração.
+Origem e licença pendente estão no [README dos cachorros](../assets/dogs/README.md).
+
 ## 8. Ferramentas e limites de verificação
 
 A skill `godot-master` foi utilizada como referência para arquitetura,
@@ -250,6 +311,9 @@ godot --headless --editor --path . --quit
 godot --headless --path . --script tests/phase_one_smoke.gd
 godot --headless --path . --script tests/cutscene_smoke.gd
 godot --headless --path . --script tests/ui_feedback_smoke.gd
+godot --headless --path . --script tests/tob_smoke.gd
+godot --headless --path . --script tests/phase_two_smoke.gd
+godot --headless --path . --script tests/campaign_smoke.gd
 ```
 
 Quando a sessão não permitir escrita nos diretórios pessoais do Godot, prefixar
@@ -259,7 +323,7 @@ cada comando com:
 env XDG_DATA_HOME=/tmp/eu_moro_aqui_godot_data XDG_CONFIG_HOME=/tmp/eu_moro_aqui_godot_config
 ```
 
-Os testes automatizados existentes passaram após a integração dos potes:
+Testes automatizados disponíveis, verificados no desenvolvimento das duas fases:
 
 - `phase_one_smoke.gd`: separação narrativa/gameplay, bloqueio de movimento,
   fade, colisões, ambientes inativos, importação dos potes, portas, inventário,
@@ -270,6 +334,13 @@ Os testes automatizados existentes passaram após a integração dos potes:
 - `ui_feedback_smoke.gd`: resolução dos estilos verde/vermelho, retorno ao
   estilo neutro e isolamento do tema compartilhado. O teste da fase também
   verifica a classificação de cada ação integrada à gameplay.
+- `tob_smoke.gd`: Tob isolado, recortes e reprodução da animação, filtro/escala,
+  disponibilidade independente por instância e integração com a rua.
+- `phase_two_smoke.gd`: texto exato das quatro falas, imagem compartilhada,
+  bloqueio de movimento, escolhas e orientação, alerta, janela/arremesso,
+  praça/percurso/companhia/carinho, saída/retorno, recompensas e reset.
+- `campaign_smoke.gd`: passagem da fase 1 à fase 2, proteção contra duplo avanço,
+  afeto acumulado e reinício completo do jogo.
 
 Esses testes não verificam a qualidade visual do recorte ou a composição da
 tela. **A inspeção gráfica das últimas mudanças ficou pendente nesta sessão.**

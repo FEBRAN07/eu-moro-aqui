@@ -1,0 +1,11 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="Script" path="res://features/campaign/campaign.gd" id="1"]
+[ext_resource type="PackedScene" path="res://features/phase_one/phase_one.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://features/phase_two/phase_two.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://features/ui/transition.tscn" id="4"]
+[node name="Campaign" type="Node2D"]
+script = ExtResource("1")
+phases = Array[PackedScene]([ExtResource("2"), ExtResource("3")])
+[node name="CampaignTransition" parent="." instance=ExtResource("4")]
+unique_name_in_owner = true
+layer = 30

@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://features/interaction/interactable.tscn" id="1"]
+[ext_resource type="SpriteFrames" path="res://features/tob/tob_idle.tres" id="2"]
+
+[node name="Tob" instance=ExtResource("1")]
+action_id = &"tob"
+title = "Falar com Tob"
+
+[node name="Outline" parent="."]
+visible = false
+[node name="Token" parent="."]
+visible = false
+[node name="Icon" parent="."]
+visible = false
+
+[node name="Visual" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -22)
+scale = Vector2(2, 2)
+texture_filter = 1
+sprite_frames = ExtResource("2")
+animation = &"idle"
+autoplay = "idle"

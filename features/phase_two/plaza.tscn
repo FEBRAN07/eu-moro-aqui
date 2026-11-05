@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="Script" path="res://features/environments/environment.gd" id="1"]
+[ext_resource type="PackedScene" path="res://features/tob/tob.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://features/interaction/interactable.tscn" id="3"]
+[ext_resource type="Script" path="res://features/tob/follow_component.gd" id="4"]
+[node name="Plaza" type="Node2D"]
+script = ExtResource("1")
+display_name = "Praça"
+walk_bounds = Rect2(60, 125, 750, 485)
+[node name="Spawn" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(170, 470)
+[node name="Scenery" type="Node2D" parent="."]
+[node name="Grass" type="Polygon2D" parent="Scenery"]
+polygon = PackedVector2Array(0, 0, 890, 0, 890, 648, 0, 648)
+color = Color(0.48, 0.72, 0.45, 1)
+[node name="Path" type="Line2D" parent="Scenery"]
+points = PackedVector2Array(170, 520, 260, 280, 620, 280, 620, 480)
+width = 85.0
+default_color = Color(0.80, 0.76, 0.60, 1)
+[node name="Title" type="Label" parent="Scenery"]
+position = Vector2(70, 45)
+theme_override_font_sizes/font_size = 27
+text = "Praça — um tempo para brincar juntos"
+[node name="Route" type="Node2D" parent="."]
+unique_name_in_owner = true
+[node name="Point1" type="Marker2D" parent="Route"]
+position = Vector2(260, 280)
+[node name="Marker" type="Polygon2D" parent="Route/Point1"]
+polygon = PackedVector2Array(0, -24, 24, 0, 0, 24, -24, 0)
+color = Color(1, 0.88, 0.35, 1)
+[node name="Number" type="Label" parent="Route/Point1"]
+position = Vector2(-8, -18)
+theme_override_colors/font_color = Color(0.12, 0.23, 0.20, 1)
+theme_override_font_sizes/font_size = 24
+text = "1"
+[node name="Point2" type="Marker2D" parent="Route"]
+position = Vector2(620, 280)
+[node name="Marker" type="Polygon2D" parent="Route/Point2"]
+polygon = PackedVector2Array(0, -24, 24, 0, 0, 24, -24, 0)
+color = Color(1, 0.88, 0.35, 1)
+[node name="Number" type="Label" parent="Route/Point2"]
+position = Vector2(-8, -18)
+theme_override_colors/font_color = Color(0.12, 0.23, 0.20, 1)
+theme_override_font_sizes/font_size = 24
+text = "2"
+[node name="Point3" type="Marker2D" parent="Route"]
+position = Vector2(620, 480)
+[node name="Marker" type="Polygon2D" parent="Route/Point3"]
+polygon = PackedVector2Array(0, -24, 24, 0, 0, 24, -24, 0)
+color = Color(1, 0.88, 0.35, 1)
+[node name="Number" type="Label" parent="Route/Point3"]
+position = Vector2(-8, -18)
+theme_override_colors/font_color = Color(0.12, 0.23, 0.20, 1)
+theme_override_font_sizes/font_size = 24
+text = "3"
+[node name="Interactions" type="Node2D" parent="."]
+unique_name_in_owner = true
+[node name="Tob" parent="Interactions" instance=ExtResource("2")]
+unique_name_in_owner = true
+position = Vector2(250, 470)
+title = "Brincar / fazer carinho em Tob"
+[node name="Follow" type="Node" parent="Interactions/Tob" node_paths=PackedStringArray("actor")]
+unique_name_in_owner = true
+script = ExtResource("4")
+actor = NodePath("..")
+[node name="Exit" parent="Interactions" instance=ExtResource("3")]
+position = Vector2(80, 550)
+action_id = &"exit_plaza"
+title = "Voltar à rua"
