@@ -30,6 +30,7 @@ func configure_phase(title: String, goal: String, instructions: String) -> void:
 
 func update_overview(area_name: String, affection: int, details: String, capacity := 2) -> void:
 	location.text = "Local: " + area_name
+	hearts.add_theme_font_size_override("font_size", 17 if capacity > 8 else 20 if capacity > 6 else 26 if capacity > 4 else 32)
 	hearts.text = "♥".repeat(clampi(affection, 0, capacity)) + "♡".repeat(maxi(0, capacity - affection))
 	inventory.text = details
 

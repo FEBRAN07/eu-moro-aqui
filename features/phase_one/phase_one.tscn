@@ -9,10 +9,13 @@
 [ext_resource type="Resource" path="res://features/phase_one/phase_content.tres" id="7"]
 [ext_resource type="PackedScene" uid="uid://by7xdl2jgwjdq" path="res://features/cutscene/cutscene.tscn" id="8"]
 [ext_resource type="Resource" uid="uid://dci2770aob4s8" path="res://features/phase_one/intro_cutscene.tres" id="9_5e4oj"]
+[ext_resource type="PackedScene" path="res://features/environments/world_camera.tscn" id="10"]
 
 [node name="PhaseOne" type="Node2D" unique_id=1434936094]
 script = ExtResource("1")
 content = ExtResource("7")
+
+[node name="WorldCamera" parent="." instance=ExtResource("10")]
 
 [node name="Environments" type="Node2D" parent="." unique_id=1238489600]
 

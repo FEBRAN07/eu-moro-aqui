@@ -5,11 +5,14 @@
 [ext_resource type="Texture2D" path="res://assets/pets/food_bowl.tres" id="3"]
 [ext_resource type="Texture2D" path="res://assets/pets/water_bowl.tres" id="4"]
 [ext_resource type="Texture2D" path="res://assets/food/cooked_beef.png" id="5"]
+[ext_resource type="PackedScene" path="res://features/environments/standalone_world_camera.tscn" id="6"]
 
 [node name="House" type="Node2D" unique_id=223409771]
 script = ExtResource("1")
 display_name = "Casa"
-walk_bounds = Rect2(60, 125, 750, 485)
+walk_bounds = Rect2(60, 125, 750, 449)
+
+[node name="StandaloneCamera" parent="." instance=ExtResource("6")]
 
 [node name="Spawn" type="Marker2D" parent="." unique_id=751313743]
 unique_name_in_owner = true
@@ -19,7 +22,7 @@ position = Vector2(415, 420)
 
 [node name="Background" type="Polygon2D" parent="Scenery" unique_id=65101261]
 color = Color(0.2392, 0.3216, 0.3843, 1)
-polygon = PackedVector2Array(0, 0, 890, 0, 890, 648, 0, 648)
+polygon = PackedVector2Array(0, 0, 1024, 0, 1024, 648, 0, 648)
 
 [node name="Floor" type="Polygon2D" parent="Scenery" unique_id=176114378]
 color = Color(0.9451, 0.8392, 0.6588, 1)

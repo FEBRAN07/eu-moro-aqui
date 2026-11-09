@@ -1,0 +1,39 @@
+[gd_scene load_steps=13 format=3]
+[ext_resource type="Script" path="res://features/phase_four/phase_four.gd" id="1"]
+[ext_resource type="PackedScene" path="res://features/phase_four/street.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://features/phase_four/house.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://features/phase_four/clinic.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://features/player/player.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://features/ui/phase_ui.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://features/ui/transition.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://features/cutscene/cutscene.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://features/environments/world_camera.tscn" id="9"]
+[ext_resource type="Script" path="res://features/ui/feedback_alert.gd" id="10"]
+[ext_resource type="Resource" path="res://features/phase_four/phase_content.tres" id="11"]
+[ext_resource type="Script" path="res://features/tob/soft_howl.gd" id="12"]
+[node name="PhaseFour" type="Node2D"]
+script = ExtResource("1")
+content = ExtResource("11")
+[node name="WorldCamera" parent="." instance=ExtResource("9")]
+[node name="Street" parent="." instance=ExtResource("2")]
+unique_name_in_owner = true
+[node name="House" parent="." instance=ExtResource("3")]
+unique_name_in_owner = true
+[node name="Clinic" parent="." instance=ExtResource("4")]
+unique_name_in_owner = true
+[node name="Player" parent="." instance=ExtResource("5")]
+unique_name_in_owner = true
+[node name="PhaseUI" parent="." instance=ExtResource("6")]
+unique_name_in_owner = true
+[node name="Transition" parent="." instance=ExtResource("7")]
+unique_name_in_owner = true
+[node name="Cutscene" parent="." instance=ExtResource("8")]
+unique_name_in_owner = true
+[node name="Alert" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+script = ExtResource("10")
+volume_db = -16.0
+[node name="Howl" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+script = ExtResource("12")
+volume_db = -20.0

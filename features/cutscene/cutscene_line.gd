@@ -4,3 +4,7 @@ class_name EMACutsceneLine
 @export var speaker := "Tob"
 @export_multiline var text := ""
 @export var background: Texture2D
+## A nonempty list replaces all foreground layers. Empty keeps the previous list.
+@export var overlays: Array[Texture2D] = []
+## Remove previous layers, including when overlays is empty (a background-only shot).
+@export var clear_overlays := false

@@ -3,7 +3,7 @@ class_name EMAPlayer
 
 signal interaction_requested
 @export var speed := 280.0
-@export var walk_bounds := Rect2(38, 125, 792, 485)
+@export var walk_bounds := Rect2(38, 125, 792, 449)
 @onready var controls: EMAPlayerInput = %PlayerInput
 @onready var prompt: Label = %Prompt
 

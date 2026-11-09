@@ -1,18 +1,20 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 [ext_resource type="Script" path="res://features/environments/environment.gd" id="1"]
 [ext_resource type="PackedScene" path="res://features/tob/tob.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://features/interaction/interactable.tscn" id="3"]
 [ext_resource type="Script" path="res://features/tob/follow_component.gd" id="4"]
+[ext_resource type="PackedScene" path="res://features/environments/standalone_world_camera.tscn" id="5"]
 [node name="Plaza" type="Node2D"]
 script = ExtResource("1")
 display_name = "Praça"
-walk_bounds = Rect2(60, 125, 750, 485)
+walk_bounds = Rect2(60, 125, 750, 449)
+[node name="StandaloneCamera" parent="." instance=ExtResource("5")]
 [node name="Spawn" type="Marker2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(170, 470)
 [node name="Scenery" type="Node2D" parent="."]
 [node name="Grass" type="Polygon2D" parent="Scenery"]
-polygon = PackedVector2Array(0, 0, 890, 0, 890, 648, 0, 648)
+polygon = PackedVector2Array(0, 0, 1024, 0, 1024, 648, 0, 648)
 color = Color(0.48, 0.72, 0.45, 1)
 [node name="Path" type="Line2D" parent="Scenery"]
 points = PackedVector2Array(170, 520, 260, 280, 620, 280, 620, 480)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=12 format=3]
 [ext_resource type="Script" path="res://features/phase_two/phase_two.gd" id="1"]
 [ext_resource type="PackedScene" path="res://features/phase_two/street.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://features/phase_two/house.tscn" id="3"]
@@ -9,9 +9,11 @@
 [ext_resource type="PackedScene" path="res://features/cutscene/cutscene.tscn" id="8"]
 [ext_resource type="Resource" path="res://features/phase_two/phase_content.tres" id="9"]
 [ext_resource type="Script" path="res://features/ui/feedback_alert.gd" id="10"]
+[ext_resource type="PackedScene" path="res://features/environments/world_camera.tscn" id="11"]
 [node name="PhaseTwo" type="Node2D"]
 script = ExtResource("1")
 content = ExtResource("9")
+[node name="WorldCamera" parent="." instance=ExtResource("11")]
 [node name="Street" parent="." instance=ExtResource("2")]
 unique_name_in_owner = true
 [node name="House" parent="." instance=ExtResource("3")]

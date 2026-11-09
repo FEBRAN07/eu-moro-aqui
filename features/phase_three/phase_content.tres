@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EMAPhaseThreeContent" load_steps=3 format=3]
+[ext_resource type="Script" path="res://features/phase_three/phase_content.gd" id="1"]
+[ext_resource type="Resource" path="res://features/phase_three/intro_cutscene.tres" id="2"]
+[resource]
+script = ExtResource("1")
+intro_cutscene = ExtResource("2")
+bad_choice = "Um pano ao relento não protege da chuva e do vento. O ideal é oferecer uma casinha coberta ou abrigo dentro de casa."
+cloth_picked = "Você pegou um pano. Volte até Tob para escolher onde ele vai se abrigar."
+kennel_picked = "Você pegou a casinha de madeira. Volte até Tob para colocá-la ao lado do poste."
+kennel_result = "Você colocou uma casinha de madeira ao lado do poste. Tob está abrigado da chuva! Levá-lo para dentro de casa também o protegeria do vento e ajudaria a acalmar seu medo."
+indoor_result = "Você trouxe Tob para dentro de casa. Agora ele está protegido da chuva e do vento e tem sua companhia para não sentir medo da tempestade."

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EMAPhaseFourContent" load_steps=3 format=3]
+[ext_resource type="Script" path="res://features/phase_four/phase_content.gd" id="1"]
+[ext_resource type="Resource" path="res://features/phase_four/intro_cutscene.tres" id="2"]
+[resource]
+script = ExtResource("1")
+intro_cutscene = ExtResource("2")
+bad_choice = "Você fez carinho em Tob e ofereceu água. Esse cuidado não substitui uma avaliação veterinária. Chame um adulto e procure um veterinário. Remédios só devem ser dados com orientação profissional."
+water_picked = "Você preparou água limpa para Tob. Água ajuda no cuidado, mas, se ele parece doente, é importante pedir ajuda a um adulto e procurar um veterinário."
+guidance = "Mãe: Conversei com um veterinário sobre Tob. Vou seguir apenas a prescrição e as orientações recebidas para ele. Volte até Tob para acompanhar o cuidado com o adulto."
+referral = "Você diz: Temos que levar o Tob no médico. Mãe: Vamos juntos à clínica. Saia de casa e procure a entrada da clínica na rua."
+adult_result = "Você pediu ajuda à mãe. Com orientação veterinária, o adulto ficou responsável pela medicação prescrita para Tob. Nunca dê remédios por conta própria. Uma consulta presencial permite avaliar melhor o que está acontecendo."
+vet_result = "Você chamou um adulto e levou Tob ao veterinário. Ele foi examinado e o profissional orientou o tratamento adequado. Pedir ajuda e buscar atendimento é uma forma responsável de cuidar."

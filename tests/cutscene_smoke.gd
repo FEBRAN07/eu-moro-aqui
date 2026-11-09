@@ -19,6 +19,7 @@ func _key(code: Key, pressed: bool, echo := false) -> void:
 	root.push_input(event)
 
 func _run() -> void:
+	root.size = Vector2i(1024, 512)
 	var presenter := (load("res://features/cutscene/cutscene.tscn") as PackedScene).instantiate() as EMACutscene
 	root.add_child(presenter)
 	presenter.finished.connect(func() -> void: _finished_count += 1)

@@ -1,8 +1,14 @@
 [gd_resource type="Resource" script_class="EMACutsceneData" format=3 uid="uid://dci2770aob4s8"]
 
 [ext_resource type="Script" uid="uid://b266ngwrobqv7" path="res://features/cutscene/cutscene_data.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://b628llrhesxqn" path="res://features/cutscene/art/tob_triste_sol.png" id="1_uchv0"]
+[ext_resource type="Texture2D" uid="uid://cv7s22m1xges4" path="res://assets/team/cutscenes/backgrounds/poste.png" id="1_uchv0"]
 [ext_resource type="Script" uid="uid://cf0tnmqrh584f" path="res://features/cutscene/cutscene_line.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://cidj0pi1npvlr" path="res://assets/team/cutscenes/backgrounds/floresta.png" id="forest"]
+[ext_resource type="Texture2D" uid="uid://cjnuxb3lcck7q" path="res://assets/team/cutscenes/characters/mae_tob.png" id="mother"]
+[ext_resource type="Texture2D" uid="uid://4elui76ngsd8" path="res://assets/team/cutscenes/characters/tob_filhote.png" id="puppy"]
+[ext_resource type="Texture2D" uid="uid://wq7ax87h0e8b" path="res://assets/team/cutscenes/characters/tob_triste.png" id="sad"]
+[ext_resource type="Texture2D" uid="uid://dtk58vi7rt6xj" path="res://assets/team/cutscenes/backgrounds/riacho.png" id="stream"]
+[ext_resource type="Texture2D" uid="uid://bs0xyugvla8ea" path="res://assets/team/cutscenes/backgrounds/rua.png" id="street"]
 
 [sub_resource type="Resource" id="Line1"]
 script = ExtResource("2")
@@ -11,14 +17,19 @@ text = "Oi. Meu nome é Tob. Eu sou um cachorro forte e corajoso. Tenho quase 2 
 [sub_resource type="Resource" id="Line2"]
 script = ExtResource("2")
 text = "Eu nasci no meio do mato, ali na rua de baixo. Eu e a mamãe ficávamos sempre juntos. Ela me ensinou que, se eu agradar os humanos, eu posso ganhar comida."
+background = ExtResource("forest")
+overlays = Array[Texture2D]([ExtResource("puppy"), ExtResource("mother")])
 
 [sub_resource type="Resource" id="Line3"]
 script = ExtResource("2")
 text = "Nos dias quentes, eu e a mamãe tomávamos banho no riacho aqui perto. A água era fresca e a gente brincava muito. Minha mãe era linda e muito cuidadosa. Eu me sentia seguro ao lado dela…"
+background = ExtResource("stream")
 
 [sub_resource type="Resource" id="Line4"]
 script = ExtResource("2")
 text = "Mas um dia, há 3 meses, ela foi atropelada por um carro que andava muito rápido nessa rua."
+background = ExtResource("street")
+overlays = Array[Texture2D]([ExtResource("sad")])
 
 [sub_resource type="Resource" id="Line5"]
 script = ExtResource("2")
@@ -27,6 +38,7 @@ text = "Eu fiquei com muito medo. Senti uma saudade enorme da mamãe."
 [sub_resource type="Resource" id="Line6"]
 script = ExtResource("2")
 text = "Desde então, eu moro aqui, perto desse poste, nessa rua. As pessoas passam e às vezes me cumprimentam, fazendo um carinho na minha cabeça."
+background = ExtResource("1_uchv0")
 
 [sub_resource type="Resource" id="Line7"]
 script = ExtResource("2")
@@ -36,4 +48,5 @@ text = "De vez em quando alguém me dá comida. Por falar nisso… faz dois dias
 script = ExtResource("1")
 title = "Eu Moro Aqui · Fase 1 — Um primeiro cuidado"
 background = ExtResource("1_uchv0")
+overlays = Array[Texture2D]([ExtResource("sad")])
 lines = Array[ExtResource("2")]([SubResource("Line1"), SubResource("Line2"), SubResource("Line3"), SubResource("Line4"), SubResource("Line5"), SubResource("Line6"), SubResource("Line7")])

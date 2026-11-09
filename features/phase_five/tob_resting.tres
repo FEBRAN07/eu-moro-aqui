@@ -1,0 +1,19 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://buqlr16gu5o3u"]
+
+[ext_resource type="Texture2D" uid="uid://owik1jiabc2q" path="res://assets/dogs/Dogs-Remastered-12.png" id="1"]
+
+[sub_resource type="AtlasTexture" id="Rest"]
+atlas = ExtResource("1")
+region = Rect2(0, 384, 64, 48)
+filter_clip = true
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Rest")
+}],
+"loop": 1,
+"name": &"rest",
+"speed": 1.0
+}]

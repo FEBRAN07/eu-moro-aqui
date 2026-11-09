@@ -22,39 +22,47 @@ layout_mode = 0
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -262.0
+offset_left = -224.0
+theme_type_variation = &"SidebarPanel"
 mouse_filter = 2
 
 [node name="Info" type="VBoxContainer" parent="Root/Sidebar" unique_id=1965929485]
 layout_mode = 2
 mouse_filter = 2
+theme_override_constants/separation = 6
 
 [node name="PhaseTitle" type="Label" parent="Root/Sidebar/Info" unique_id=1426165590]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.91, 0.57, 1)
 text = "FASE 1"
+theme_override_font_sizes/font_size = 18
 
 [node name="Location" type="Label" parent="Root/Sidebar/Info" unique_id=735480029]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Local: Rua"
+theme_override_font_sizes/font_size = 16
+autowrap_mode = 3
 
 [node name="Objective" type="Label" parent="Root/Sidebar/Info" unique_id=1181044261]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Objetivo:
 Alimente Tob."
+theme_override_font_sizes/font_size = 16
+autowrap_mode = 3
 
 [node name="AffectionTitle" type="Label" parent="Root/Sidebar/Info" unique_id=347384461]
 layout_mode = 2
 text = "AFETO DE TOB"
+theme_override_font_sizes/font_size = 14
 
 [node name="Hearts" type="Label" parent="Root/Sidebar/Info" unique_id=1567348839]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.95, 0.36, 0.44, 1)
-theme_override_font_sizes/font_size = 44
+theme_override_font_sizes/font_size = 32
 text = "♡   ♡"
 
 [node name="Inventory" type="Label" parent="Root/Sidebar/Info" unique_id=808119689]
@@ -63,11 +71,13 @@ layout_mode = 2
 text = "LEVANDO
 Sem ração
 Sem água"
+theme_override_font_sizes/font_size = 14
+autowrap_mode = 3
 
 [node name="Hint" type="Label" parent="Root/Sidebar/Info" unique_id=2101752086]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 14
 text = "Cada cuidado responsável fortalece a confiança de Tob."
 autowrap_mode = 3
 
@@ -78,18 +88,21 @@ mouse_filter = 2
 
 [node name="Controls" type="Label" parent="Root/Sidebar/Info" unique_id=96429303]
 layout_mode = 2
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 13
 text = "CONTROLES
 WASD / setas: mover
 E / clique: interagir"
 
 [node name="Modal" type="PanelContainer" parent="Root" unique_id=13174197]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 76.0
-offset_top = 365.0
-offset_right = 814.0
-offset_bottom = 622.0
+layout_mode = 1
+anchor_right = 1.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -310.0
+offset_right = -248.0
+offset_bottom = -16.0
 mouse_filter = 2
 
 [node name="Content" type="VBoxContainer" parent="Root/Modal" unique_id=318884175]
@@ -100,7 +113,7 @@ mouse_filter = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.91, 0.57, 1)
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 22
 text = "TOB"
 autowrap_mode = 3
 
@@ -108,7 +121,7 @@ autowrap_mode = 3
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 21
+theme_override_font_sizes/font_size = 19
 text = "Oi. Meu nome é Tob."
 autowrap_mode = 3
 

@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="EMACutsceneData" format=3 uid="uid://cfu5f5vr4ogon"]
+
+[ext_resource type="Script" uid="uid://b266ngwrobqv7" path="res://features/cutscene/cutscene_data.gd" id="1"]
+[ext_resource type="Script" uid="uid://cf0tnmqrh584f" path="res://features/cutscene/cutscene_line.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://blmkkh4tess4g" path="res://assets/team/cutscenes/backgrounds/poste_chuvoso.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://bfdaq2n3ix2xu" path="res://assets/team/cutscenes/characters/tob_feliz.png" id="happy"]
+[ext_resource type="Texture2D" uid="uid://wq7ax87h0e8b" path="res://assets/team/cutscenes/characters/tob_triste.png" id="sad"]
+
+[sub_resource type="Resource" id="Line1"]
+script = ExtResource("2")
+text = "Nossa essa brincadeira foi demais... estou feliz por ter um amigo que brinca comigo."
+
+[sub_resource type="Resource" id="Line2"]
+script = ExtResource("2")
+text = "Tá quente aqui né?! E sabe o que mais estou sentindo? Sinto cheiro de tempestade no ar..."
+
+[sub_resource type="Resource" id="Line3"]
+script = ExtResource("2")
+text = "Minha mãe sempre falava que eu sou corajoso! Eu não tenho medo de chuvinhas... até gosto de me molhar, quando está calor, mas essa tempestade que está vindo aí é das grandes..."
+
+[sub_resource type="Resource" id="Line4"]
+script = ExtResource("2")
+text = "Eu tenho um pouco de medo de tempestades... Onde será que vou me esconder?"
+overlays = Array[Texture2D]([ExtResource("sad")])
+
+[resource]
+script = ExtResource("1")
+title = "Eu Moro Aqui · Fase 3 — Abrigo na tempestade"
+background = ExtResource("3")
+overlays = Array[Texture2D]([ExtResource("happy")])
+lines = Array[ExtResource("2")]([SubResource("Line1"), SubResource("Line2"), SubResource("Line3"), SubResource("Line4")])

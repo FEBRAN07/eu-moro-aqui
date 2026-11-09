@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3]
+[ext_resource type="Script" path="res://features/environments/environment.gd" id="1"]
+[ext_resource type="PackedScene" path="res://features/environments/standalone_world_camera.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://features/interaction/interactable.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://features/tob/tob.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://features/npc/adult.tscn" id="5"]
+[ext_resource type="Texture2D" path="res://assets/team/cutscenes/backgrounds/veterinario.png" id="6"]
+[node name="Clinic" type="Node2D"]
+script = ExtResource("1")
+display_name = "Clínica veterinária"
+walk_bounds = Rect2(60, 125, 750, 449)
+[node name="StandaloneCamera" parent="." instance=ExtResource("2")]
+[node name="Spawn" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(280, 460)
+[node name="Scenery" type="Node2D" parent="."]
+[node name="Floor" type="Polygon2D" parent="Scenery"]
+polygon = PackedVector2Array(0, 0, 1024, 0, 1024, 648, 0, 648)
+color = Color(0.74, 0.86, 0.87, 1)
+[node name="Picture" type="Sprite2D" parent="Scenery"]
+position = Vector2(180, 180)
+scale = Vector2(0.2, 0.2)
+texture_filter = 1
+texture = ExtResource("6")
+[node name="Table" type="Polygon2D" parent="Scenery"]
+polygon = PackedVector2Array(380, 310, 580, 310, 580, 395, 380, 395)
+color = Color(0.88, 0.91, 0.92, 1)
+[node name="Title" type="Label" parent="Scenery"]
+position = Vector2(80, 45)
+theme_override_font_sizes/font_size = 27
+text = "Clínica — avaliação e cuidado profissional"
+[node name="Interactions" type="Node2D" parent="."]
+unique_name_in_owner = true
+[node name="Veterinarian" parent="Interactions" instance=ExtResource("5")]
+position = Vector2(620, 290)
+action_id = &"vet"
+title = "Consultar veterinário"
+[node name="Body" parent="Interactions/Veterinarian"]
+color = Color(0.95, 0.95, 0.94, 1)
+[node name="Tob" parent="Interactions" instance=ExtResource("4")]
+position = Vector2(480, 350)
+title = "Tob aguarda atendimento"
+[node name="Mother" parent="Interactions" instance=ExtResource("5")]
+position = Vector2(340, 430)
+[node name="Exit" parent="Interactions" instance=ExtResource("3")]
+position = Vector2(100, 540)
+action_id = &"exit_clinic"
+title = "Voltar à rua"

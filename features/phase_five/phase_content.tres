@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EMAPhaseFiveContent" load_steps=5 format=3]
+[ext_resource type="Script" path="res://features/phase_five/phase_content.gd" id="1"]
+[ext_resource type="Resource" path="res://features/phase_five/intro_cutscene.tres" id="2"]
+[ext_resource type="Resource" path="res://features/phase_five/temporary_ending.tres" id="3"]
+[ext_resource type="Resource" path="res://features/phase_five/adoption_ending.tres" id="4"]
+[resource]
+script = ExtResource("1")
+intro_cutscene = ExtResource("2")
+temporary_ending = ExtResource("3")
+adoption_ending = ExtResource("4")
+bad_choice = "Tob está sozinho e triste. Ignorar um cão sofrendo é cruel. Oferecer abrigo temporário ou adoção salva vidas."
+bed_picked = "Você pegou uma caminha com mantas quentinhas. Volte até Tob para oferecer esse cuidado."
+temporary_result = "Tob ganhou uma caminha com mantas. Está mais confortável, mas ainda precisa da companhia e proteção de uma família."
+adoption_result = "Você acolheu Tob e pediu sua adoção à mãe. Ele será amado, protegido e cuidado. Tob agora tem uma família!"

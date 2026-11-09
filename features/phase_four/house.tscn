@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="PackedScene" path="res://features/environments/house.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://features/npc/adult.tscn" id="2"]
+[node name="House" instance=ExtResource("1")]
+[node name="Leftovers" parent="Interactions"]
+visible = false
+[node name="Food" parent="Interactions"]
+visible = false
+[node name="Mother" parent="Interactions" instance=ExtResource("2")]
+position = Vector2(570, 400)

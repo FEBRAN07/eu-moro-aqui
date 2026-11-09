@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="PackedScene" path="res://features/environments/street.tscn" id="1"]
+[ext_resource type="SpriteFrames" path="res://features/phase_five/tob_resting.tres" id="2"]
+[ext_resource type="PackedScene" path="res://features/shelter/dog_bed.tscn" id="3"]
+[node name="Street" instance=ExtResource("1")]
+[node name="Bed" parent="Scenery" instance=ExtResource("3")]
+unique_name_in_owner = true
+visible = false
+position = Vector2(720, 462)
+[node name="Tob" parent="Interactions"]
+unique_name_in_owner = true
+title = "Aproximar-se de Tob"
+[node name="Visual" parent="Interactions/Tob"]
+sprite_frames = ExtResource("2")
+animation = &"rest"
+autoplay = "rest"

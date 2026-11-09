@@ -2,7 +2,7 @@ extends Node2D
 class_name EMAEnvironment
 
 @export var display_name := "Rua"
-@export var walk_bounds := Rect2(38, 125, 792, 485)
+@export var walk_bounds := Rect2(38, 125, 792, 449)
 @onready var spawn: Marker2D = %Spawn
 @onready var interactions: Node2D = %Interactions
 

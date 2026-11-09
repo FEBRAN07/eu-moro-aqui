@@ -35,6 +35,22 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
+[sub_resource type="StyleBoxFlat" id="CutscenePanel"]
+content_margin_left = 16.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 12.0
+bg_color = Color(0.09, 0.21, 0.29, 0.97)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.91, 0.57, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
 [sub_resource type="StyleBoxFlat" id="ErrorPanel"]
 content_margin_left = 24.0
 content_margin_top = 20.0
@@ -46,6 +62,22 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.98, 0.48, 0.48, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="SidebarPanel"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.09, 0.21, 0.29, 0.97)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.91, 0.57, 1)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
@@ -73,10 +105,14 @@ Button/styles/focus = SubResource("Focus")
 Button/styles/hover = SubResource("Panel")
 Button/styles/normal = SubResource("Button")
 Button/styles/pressed = SubResource("Panel")
+CutscenePanel/base_type = &"PanelContainer"
+CutscenePanel/styles/panel = SubResource("CutscenePanel")
 ErrorMessage/base_type = &"PanelContainer"
 ErrorMessage/styles/panel = SubResource("ErrorPanel")
 Label/colors/font_color = Color(0.91, 0.96, 1, 1)
 PanelContainer/styles/panel = SubResource("Panel")
+SidebarPanel/base_type = &"PanelContainer"
+SidebarPanel/styles/panel = SubResource("SidebarPanel")
 SuccessMessage/base_type = &"PanelContainer"
 SuccessMessage/styles/panel = SubResource("SuccessPanel")
 VBoxContainer/constants/separation = 14

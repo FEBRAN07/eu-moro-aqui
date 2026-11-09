@@ -27,7 +27,50 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.08, 0.12, 0.17, 1)
 
-[node name="Background" type="TextureRect" parent="Screen" unique_id=1505697876]
+[node name="Layout" type="MarginContainer" parent="Screen" unique_id=2055808075]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 12
+
+[node name="Stack" type="VBoxContainer" parent="Screen/Layout" unique_id=1544983356]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Chapter" type="Label" parent="Screen/Layout/Stack" unique_id=805674780]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.08, 0.12, 0.17, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
+text = "Eu Moro Aqui"
+
+[node name="Spacer" type="Control" parent="Screen/Layout/Stack" unique_id=1650041361]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Artwork" type="Control" parent="Screen"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+clip_contents = true
+
+[node name="Background" type="TextureRect" parent="Screen/Artwork" unique_id=1505697876]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -39,7 +82,8 @@ mouse_filter = 2
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Layout" type="MarginContainer" parent="Screen" unique_id=2055808075]
+[node name="Overlays" type="Control" parent="Screen/Artwork"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,53 +91,32 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 28
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 28
-
-[node name="Stack" type="VBoxContainer" parent="Screen/Layout" unique_id=1544983356]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = 16
-
-[node name="Chapter" type="Label" parent="Screen/Layout/Stack" unique_id=805674780]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0.08, 0.12, 0.17, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 24
-text = "Eu Moro Aqui"
-
-[node name="Spacer" type="Control" parent="Screen/Layout/Stack" unique_id=1650041361]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
 
 [node name="DialoguePanel" type="PanelContainer" parent="Screen/Layout/Stack" unique_id=2100246844]
-custom_minimum_size = Vector2(0, 224)
+custom_minimum_size = Vector2(0, 192)
+theme_type_variation = &"CutscenePanel"
 layout_mode = 2
 mouse_filter = 2
 
 [node name="Content" type="VBoxContainer" parent="Screen/Layout/Stack/DialoguePanel" unique_id=1770333412]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 8
 
 [node name="Speaker" type="Label" parent="Screen/Layout/Stack/DialoguePanel/Content" unique_id=277247373]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.91, 0.57, 1)
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 20
 text = "Tob"
 
 [node name="Dialogue" type="RichTextLabel" parent="Screen/Layout/Stack/DialoguePanel/Content" unique_id=567838192]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 78)
+custom_minimum_size = Vector2(0, 66)
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 1
-theme_override_font_sizes/normal_font_size = 23
+theme_override_font_sizes/normal_font_size = 18
 text = "O diálogo da cutscene aparece aqui."
 
 [node name="Footer" type="HBoxContainer" parent="Screen/Layout/Stack/DialoguePanel/Content" unique_id=829850171]
@@ -104,18 +127,19 @@ theme_override_constants/separation = 20
 [node name="Hint" type="Label" parent="Screen/Layout/Stack/DialoguePanel/Content/Footer" unique_id=337469006]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 13
 text = "Espaço / Enter / E ou clique para avançar"
 
 [node name="Progress" type="Label" parent="Screen/Layout/Stack/DialoguePanel/Content/Footer" unique_id=136579869]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 13
 text = "1 / 4"
 
 [node name="NextButton" type="Button" parent="Screen/Layout/Stack/DialoguePanel/Content/Footer" unique_id=244163536]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(170, 44)
+custom_minimum_size = Vector2(150, 36)
+theme_override_font_sizes/font_size = 14
 layout_mode = 2
 text = "Continuar"
 

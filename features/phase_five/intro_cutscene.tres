@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EMACutsceneData" format=3 uid="uid://d2k11xjl51si1"]
+
+[ext_resource type="Script" uid="uid://b266ngwrobqv7" path="res://features/cutscene/cutscene_data.gd" id="1"]
+[ext_resource type="Script" uid="uid://cf0tnmqrh584f" path="res://features/cutscene/cutscene_line.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://cv7s22m1xges4" path="res://assets/team/cutscenes/backgrounds/poste.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://cqo8sh8n2dh2v" path="res://assets/team/cutscenes/characters/tob_triste_deitado.png" id="4"]
+
+[sub_resource type="Resource" id="Silence"]
+script = ExtResource("2")
+text = "..."
+
+[resource]
+script = ExtResource("1")
+title = "Eu Moro Aqui · Fase 5 — Uma família para Tob"
+background = ExtResource("3")
+overlays = Array[Texture2D]([ExtResource("4")])
+lines = Array[ExtResource("2")]([SubResource("Silence")])

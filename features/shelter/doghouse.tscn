@@ -1,0 +1,11 @@
+[gd_scene format=3]
+[node name="Doghouse" type="Node2D"]
+[node name="Walls" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-46, -22, 46, -22, 46, 42, -46, 42)
+color = Color(0.69, 0.43, 0.23, 1)
+[node name="Roof" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-56, -22, 0, -64, 56, -22)
+color = Color(0.44, 0.25, 0.15, 1)
+[node name="Door" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-19, 42, -19, 0, -10, -12, 10, -12, 19, 0, 19, 42)
+color = Color(0.16, 0.16, 0.19, 1)

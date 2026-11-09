@@ -1,0 +1,5 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="PackedScene" path="res://features/cutscene/cutscene.tscn" id="1"]
+[ext_resource type="Resource" path="res://features/phase_three/intro_cutscene.tres" id="2"]
+[node name="IntroPreview" instance=ExtResource("1")]
+preview_data = ExtResource("2")

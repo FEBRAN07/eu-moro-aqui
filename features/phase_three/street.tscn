@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="PackedScene" path="res://features/environments/street.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://features/shelter/doghouse.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://features/phase_three/rain.tscn" id="3"]
+[ext_resource type="Script" path="res://features/tob/follow_component.gd" id="4"]
+[node name="Street" instance=ExtResource("1")]
+display_name = "Rua — tempestade"
+[node name="Scenery" parent="."]
+modulate = Color(0.55, 0.64, 0.74, 1)
+[node name="PlacedCloth" type="Polygon2D" parent="Scenery"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(720, 462)
+polygon = PackedVector2Array(-48, -16, 48, -16, 54, 18, -48, 18)
+color = Color(0.67, 0.34, 0.46, 1)
+[node name="Doghouse" parent="Scenery" instance=ExtResource("2")]
+unique_name_in_owner = true
+visible = false
+position = Vector2(740, 435)
+[node name="Rain" parent="Scenery" instance=ExtResource("3")]
+[node name="Tob" parent="Interactions"]
+unique_name_in_owner = true
+title = "Ajudar Tob a se abrigar"
+[node name="Follow" type="Node" parent="Interactions/Tob" node_paths=PackedStringArray("actor")]
+unique_name_in_owner = true
+script = ExtResource("4")
+actor = NodePath("..")

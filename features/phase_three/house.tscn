@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="PackedScene" path="res://features/environments/house.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://features/interaction/interactable.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://features/shelter/doghouse.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://features/tob/tob.tscn" id="4"]
+[node name="House" instance=ExtResource("1")]
+[node name="Leftovers" parent="Interactions"]
+visible = false
+[node name="Food" parent="Interactions"]
+visible = false
+[node name="Water" parent="Interactions"]
+visible = false
+[node name="Cloth" parent="Interactions" instance=ExtResource("2")]
+position = Vector2(250, 280)
+action_id = &"cloth"
+title = "Pegar pano"
+[node name="Icon" parent="Interactions/Cloth"]
+visible = false
+[node name="Fabric" type="Polygon2D" parent="Interactions/Cloth"]
+polygon = PackedVector2Array(-26, -14, 26, -14, 29, 16, -26, 16)
+color = Color(0.67, 0.34, 0.46, 1)
+[node name="Kennel" parent="Interactions" instance=ExtResource("2")]
+position = Vector2(480, 280)
+action_id = &"kennel"
+title = "Pegar casinha de madeira"
+[node name="Outline" parent="Interactions/Kennel"]
+visible = false
+[node name="Token" parent="Interactions/Kennel"]
+visible = false
+[node name="Icon" parent="Interactions/Kennel"]
+visible = false
+[node name="Visual" parent="Interactions/Kennel" instance=ExtResource("3")]
+scale = Vector2(0.55, 0.55)
+[node name="Tob" parent="Interactions" instance=ExtResource("4")]
+unique_name_in_owner = true
+visible = false
+position = Vector2(560, 420)
+title = "Tob está abrigado"

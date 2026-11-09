@@ -1,29 +1,31 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 [ext_resource type="Script" path="res://features/environments/environment.gd" id="1"]
 [ext_resource type="PackedScene" path="res://features/interaction/interactable.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://features/tob/tob.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://features/environments/standalone_world_camera.tscn" id="4"]
 [node name="Street" type="Node2D"]
 script = ExtResource("1")
 display_name = "Rua"
+[node name="StandaloneCamera" parent="." instance=ExtResource("4")]
 [node name="Spawn" type="Marker2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(317, 410)
 [node name="Scenery" type="Node2D" parent="."]
 
 [node name="Sky" type="Polygon2D" parent="Scenery"]
-polygon = PackedVector2Array(0, 0, 890, 0, 890, 648, 0, 648)
+polygon = PackedVector2Array(0, 0, 1024, 0, 1024, 648, 0, 648)
 color = Color(0.6588, 0.8510, 0.9412, 1)
 
 [node name="Grass" type="Polygon2D" parent="Scenery"]
-polygon = PackedVector2Array(0, 88, 870, 88, 870, 648, 0, 648)
+polygon = PackedVector2Array(0, 88, 1024, 88, 1024, 648, 0, 648)
 color = Color(0.6196, 0.8588, 0.5686, 1)
 
 [node name="Road" type="Polygon2D" parent="Scenery"]
-polygon = PackedVector2Array(0, 445, 870, 445, 870, 648, 0, 648)
+polygon = PackedVector2Array(0, 445, 1024, 445, 1024, 648, 0, 648)
 color = Color(0.3255, 0.3529, 0.3882, 1)
 
 [node name="RoadLine" type="Polygon2D" parent="Scenery"]
-polygon = PackedVector2Array(0, 534, 870, 534, 870, 541, 0, 541)
+polygon = PackedVector2Array(0, 534, 1024, 534, 1024, 541, 0, 541)
 color = Color(0.9451, 0.8392, 0.4275, 1)
 
 [node name="Facade" type="Polygon2D" parent="Scenery"]

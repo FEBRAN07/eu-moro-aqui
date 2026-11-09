@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="PackedScene" path="res://features/environments/street.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://features/interaction/interactable.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://features/npc/adult.tscn" id="3"]
+[ext_resource type="Texture2D" path="res://assets/pets/water_bowl.tres" id="4"]
+[node name="Street" instance=ExtResource("1")]
+display_name = "Rua — após a chuva"
+[node name="Tob" parent="Interactions"]
+unique_name_in_owner = true
+title = "Cuidar de Tob"
+modulate = Color(0.8, 0.82, 0.85, 1)
+[node name="ClinicGate" parent="Interactions" instance=ExtResource("2")]
+position = Vector2(560, 570)
+action_id = &"clinic"
+title = "Ir à clínica com adulto"
+[node name="Mother" parent="Interactions" instance=ExtResource("3")]
+unique_name_in_owner = true
+visible = false
+position = Vector2(620, 440)
+[node name="WaterBowl" type="Sprite2D" parent="Scenery"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(760, 460)
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("4")

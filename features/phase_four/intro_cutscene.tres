@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EMACutsceneData" format=3 uid="uid://dt8qegseo68wi"]
+
+[ext_resource type="Script" uid="uid://b266ngwrobqv7" path="res://features/cutscene/cutscene_data.gd" id="1"]
+[ext_resource type="Script" uid="uid://cf0tnmqrh584f" path="res://features/cutscene/cutscene_line.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://cv7s22m1xges4" path="res://assets/team/cutscenes/backgrounds/poste.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://mn2ndxxd8own" path="res://assets/team/cutscenes/characters/tob_doente.png" id="4"]
+
+[sub_resource type="Resource" id="Line1"]
+script = ExtResource("2")
+text = "Ufa, essa tempestade foi assustadora! Ainda bem que tenho um amigo que me abrigou. Mamãe sempre dizia, devemos ser fiéis aos humanos, pois eles estão aqui para cuidar de nós e nós deles."
+
+[sub_resource type="Resource" id="Line2"]
+script = ExtResource("2")
+text = "Quando penso na mamãe meu coração aperta de saudades. Ela sempre cuidou de mim e me defendeu de tudo e de todos. Sinto tanto a falta dela. Será que ela está bem lá no céu?"
+
+[sub_resource type="Resource" id="Line3"]
+script = ExtResource("2")
+text = "Nossa acho que estou com gripe canina. Meu corpo todo dói.... sinto que estou muito quente."
+
+[resource]
+script = ExtResource("1")
+title = "Eu Moro Aqui · Fase 4 — Cuide de Tob"
+background = ExtResource("3")
+overlays = Array[Texture2D]([ExtResource("4")])
+lines = Array[ExtResource("2")]([SubResource("Line1"), SubResource("Line2"), SubResource("Line3")])

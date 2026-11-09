@@ -13,11 +13,12 @@ func _check(condition: bool, message: String) -> void:
 
 func _run() -> void:
 	# Headless windows default to 64x64; GUI hit tests need the intended viewport.
-	root.size = Vector2i(1152, 648)
+	root.size = Vector2i(1024, 512)
 	var ui := (load("res://features/ui/phase_ui.tscn") as PackedScene).instantiate() as EMAPhaseUI
 	root.add_child(ui)
 	await process_frame
 	var sidebar: PanelContainer = ui.get_node("Root/Sidebar")
+	var sidebar_style := sidebar.get_theme_stylebox("panel")
 	var neutral := ui.modal.get_theme_stylebox("panel") as StyleBoxFlat
 	var neutral_color := neutral.bg_color
 	ui.show_message("Correto", "Ração e água fresca.", "Continuar", EMAPhaseUI.Feedback.SUCCESS)
@@ -26,7 +27,7 @@ func _run() -> void:
 	ui.show_message("Incorreto", "Restos temperados.", "Continuar", EMAPhaseUI.Feedback.ERROR)
 	var red := ui.modal.get_theme_stylebox("panel") as StyleBoxFlat
 	_check(red.bg_color.r > red.bg_color.g and red.bg_color.r > red.bg_color.b, "Error panel must resolve to a red style.")
-	_check(sidebar.get_theme_stylebox("panel") == neutral and neutral.bg_color == neutral_color, "Feedback must not mutate the shared theme or sidebar.")
+	_check(sidebar.get_theme_stylebox("panel") == sidebar_style and neutral.bg_color == neutral_color, "Feedback must not mutate the shared theme or sidebar.")
 	ui.show_message("Informação", "Mensagem neutra.")
 	_check(ui.modal.get_theme_stylebox("panel") == neutral, "Default message must reset the feedback color.")
 	ui.show_message("Correto", "Outra mensagem.", "Continuar", EMAPhaseUI.Feedback.SUCCESS)

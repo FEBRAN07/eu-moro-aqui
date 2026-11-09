@@ -1,6 +1,6 @@
 # Processo e padrão de desenvolvimento — Eu Moro Aqui
 
-Este documento registra o trabalho realizado no protótipo das fases 1 e 2 e define
+Este documento registra o trabalho realizado no protótipo das fases 1 a 5 e define
 um fluxo para as próximas alterações. Descreve o estado atual do projeto;
 recomendações futuras não significam funcionalidades já implementadas.
 
@@ -9,6 +9,10 @@ recomendações futuras não significam funcionalidades já implementadas.
 O desenvolvimento começou pela leitura do GDD fornecido pelo usuário em
 `~/Downloads/GDDfinal.pdf`. O conceito foi traduzido em um recorte jogável:
 uma criança ajuda Tob, um cachorro de rua, aprendendo sobre cuidado responsável.
+
+Para implementar a terceira fase, foi consultada a cópia atualizada em
+`/home/fbrandes/Documentos/extensao/GDDfinal.pdf`, incluindo as quatro falas e as
+três soluções de abrigo, sem revisão do conteúdo original da cutscene.
 A primeira entrega ficou limitada à fase de alimentação, não ao jogo completo.
 
 As regras implementadas nesse recorte são:
@@ -124,6 +128,33 @@ uma cena inteira para uma mudança pontual nem desfazer ajustes não relacionado
 
 ## 5. Padrão de cenas, movimento e ambientes
 
+### Resolução-base: 1024 × 512
+
+Viewport e tamanho inicial da janela agora usam 1024 × 512, conforme solicitado
+pela equipe de arte. O override antigo de 1152 × 648 também foi atualizado.
+O HUD tem largura de 224 pixels, margens compactas e quebra de linha nos textos.
+O painel de feedback usa âncoras inferiores e reserva espaço para o HUD, sem
+depender de coordenadas fixas como o antigo limite inferior de 622 pixels.
+As cutscenes têm painel e fontes compactos, com arte em tela cheia e diálogo sobreposto.
+
+Coordenadas de tela e de mundo são conceitos separados. Os mapas provisórios
+continuam com uma área de referência de 890 × 648; `world_camera.tscn` calcula
+zoom uniforme para enquadrá-la na área disponível, com origem visível em (0, 0).
+Isso preserva colisões, velocidade em unidades de mundo e posições de interações,
+portas e percurso. Não diminuir manualmente todas as coordenadas ou escalar os
+corpos físicos para acompanhar uma mudança da janela. Os limites inferiores de
+movimento foram ajustados para manter também os rótulos dentro do enquadramento.
+
+As câmeras `standalone_world_camera.tscn` dos ambientes só ficam ativas quando o
+ambiente é executado como cena isolada. Dentro de uma fase, ficam desativadas
+para não competir com sua câmera. CanvasLayers da UI e da cutscene não recebem
+o zoom do mundo. Os fundos provisórios foram estendidos para preencher a largura
+visível, sem modificar os desenhos e colisões da casa ou as imagens importadas.
+
+Os testes de mouse/layout usam a resolução-base atual, não a janela antiga.
+`resolution_smoke.gd` verifica os retângulos dos painéis e botões, textos longos,
+espaço para a arte, pontos de interação em coordenadas de tela e limites de movimento.
+
 - Cenas reutilizáveis devem carregar isoladamente com F6, sem depender de uma
   fase específica. Sem dados de preview, é aceitável que uma cutscene não apareça.
 - Movimento usa ações do InputMap, não testes diretos de teclas no controlador.
@@ -143,6 +174,23 @@ uma cena inteira para uma mudança pontual nem desfazer ajustes não relacionado
   Verificar máscaras/camadas, spawn fora de obstáculos e acesso às portas.
 
 ## 6. Padrão de narrativa e novas fases
+
+### Composição visual por fala
+
+O motor de cutscene foi ampliado para compor um cenário com várias camadas PNG
+transparentes. `EMACutsceneData.background` e `overlays` definem o estado inicial;
+os mesmos campos em `EMACutsceneLine` permitem trocar as imagens por fala. Uma
+lista de overlays não vazia substitui as anteriores; vazia preserva as existentes,
+exceto quando `clear_overlays` estiver marcado. O replay restaura os valores
+iniciais e o apresentador nunca altera os Resources autorais.
+
+Fundos e camadas usam o mesmo enquadramento proporcional em tela cheia, com a
+caixa de diálogo sobreposta e filtro nearest. As artes fornecidas em `~/Imagens/Sprites EMA` têm canvas
+comum de 1024 × 512 e foram copiadas sem recortes para `assets/team/cutscenes/`.
+Somente imagens necessárias às introduções implementadas foram importadas; o sprite de
+Tob na gameplay e os textos das falas não foram alterados. A composição usa
+frames estáticos, sem introduzir animação ou transição temporizada entre imagens.
+Configuração no Inspector: [guia das cutscenes](../features/cutscene/README.md).
 
 O fluxo da fase 1, executada isoladamente, é:
 
@@ -177,7 +225,7 @@ atribuir seus dados a `preview_data` de uma instância de cutscene.
 ### Fase 2 e sequência da campanha
 
 `features/campaign/campaign.tscn` agora é a cena principal (F5). Seu controlador
-mantém a sequência das duas fases e o afeto acumulado durante a sessão, sem
+mantém a sequência das cinco fases e o afeto acumulado durante a sessão, sem
 autoload. As cenas das fases continuam independentes para F6; na campanha,
 `continue_on_complete` e `completion_button_text` configuram a ação de conclusão.
 `next_phase_requested` solicita a troca. A transição da campanha usa layer 30,
@@ -187,7 +235,7 @@ O afeto é registrado no signal de conclusão, sem acumular mensagens repetidas.
 Na fase 2, o controlador mantém estados exclusivos para introdução, transição,
 exploração, escolha, feedback, brincadeira, arremesso e conclusão. A cutscene tem
 as quatro falas exatamente como solicitadas, inclusive as expressões gramaticais
-do texto original, e referencia a mesma imagem da fase 1. O Resource
+do texto original, e usa a mesma biblioteca de artes da equipe da fase 1. O Resource
 `features/phase_two/phase_content.tres` contém o feedback e os resultados.
 
 - Bater o pé: menu ao interagir com Tob, alerta sonoro provisório e orientação
@@ -215,7 +263,98 @@ emitem `choice_selected(id)`; o controlador decide o efeito. Avançar uma mensag
 não pula um menu de escolhas. Fala educativa e classificação de cores permanecem
 independentes do widget que as apresenta.
 
-**Limite atual:** as fases 3–5 ainda não foram implementadas. Não há salvamento
+### Fase 3 — Abrigo durante a tempestade
+
+A terceira fase reutiliza jogador, Tob, UI, câmera, cutscene em tela cheia,
+transição e som de alerta. Rua e casa são cenas herdadas com mudanças locais;
+itens de alimentação permanecem ocultos. Os materiais `cloth` e `kennel` são
+coletados na casa e preservados pelo controlador ao atravessar portas.
+
+O menu de Tob oferece pano ao relento, casinha ou abrigo dentro de casa.
+Colocar um pano produz o alerta e o texto literal do GDD, sem premiar ou impedir
+nova tentativa. Montar a casinha exige ter coletado o item e concede um coração.
+Convidar Tob ativa o componente de acompanhamento após o diálogo, sem recompensa
+imediata. Ao interagir com a porta, a transição move a apresentação do Tob para
+o interior; só ao terminar o fade são concedidos dois corações. Os dois finais
+mostram feedback verde e bloqueiam recompensas repetidas.
+
+`phase_three.gd` possui o inventário de abrigo e os estados de introdução,
+transição, exploração, escolha, feedback e conclusão. `phase_content.tres`
+contém mensagens; `intro_cutscene.tres` contém as quatro falas exatas do GDD.
+O cenário da cutscene vem de `posteChuvoso.png`, copiado sem alterações. O pano,
+a casinha e a chuva da gameplay são recursos provisórios nativos: polígonos,
+uma cena reutilizável de casinha e `CPUParticles2D`, sem alterar colisões herdadas.
+
+Na campanha, a fase 2 avança para a fase 3 e esta para a fase 4; o reinício completo
+fica na conclusão da quinta. O HUD suporta até dez corações, com fonte menor
+quando necessário para caber nos 224 pixels da lateral. As cinco fases ainda
+reiniciam isoladamente quando executadas com F6. O reset da terceira limpa
+materiais, pano colocado, casinha, acompanhamento e posição/visibilidade dos
+dois Tobs (exterior e interior), e reapresenta a introdução.
+
+### Fase 4 — Adulto e atendimento veterinário
+
+As três falas da introdução foram transcritas do GDD, com o personagem suspeitando
+de doença, sem a apresentação confirmar um diagnóstico. O cuidado é representado
+por água, conversa com a mãe, orientação profissional e consulta na clínica.
+O pote de água reutiliza o asset existente; a mãe e o veterinário reutilizam
+uma cena interativa de adulto, com visual provisório diferente por instância.
+O uivo de entrada é sintetizado e substituível por um áudio no Inspector.
+
+Apenas água produz orientação vermelha e alerta, sem concluir a fase. O caminho
+de um coração exige que o jogador fale com a mãe, peça orientação veterinária
+e volte a Tob; o adulto, e não a criança, fica responsável pelo cuidado prescrito.
+O caminho de dois corações exige combinar a ida com um adulto, viajar até uma
+clínica separada e interagir com o veterinário. A chegada não premia sozinha.
+O estado de cuidado é preservado ao atravessar portas e ao sair/voltar da clínica.
+Reset restaura água, disponibilidade de coleta, flags de orientação e companhia,
+visuais e o uivo de entrada, além de reapresentar a cutscene.
+
+**Decisão de segurança documentada:** a descrição do GDD sobre dipirona foi
+adaptada para não ensinar que ela é sempre segura, nem simular dose ou escolha
+de medicamento pela criança. A medicação só é mencionada como cuidado prescrito,
+sob responsabilidade de um adulto com orientação veterinária. A pontuação de
+um/dois corações foi mantida. Esta é uma alteração deliberada do conteúdo educativo,
+não uma transcrição literal das soluções. Referência: [FDA — perguntas sobre
+medicamentos para animais](https://www.fda.gov/animal-veterinary/safety-health/frequently-asked-questions-about-animal-drugs).
+O objetivo é reforçar ajuda profissional; revisão do conteúdo por um veterinário
+antes da aplicação educativa continua recomendada.
+
+As cenas da fase 4 ficam em `features/phase_four/`. O controlador possui escolhas,
+água e pré-requisitos, sem delegar diagnóstico à UI. As falas e os feedbacks ficam
+em Resources. `assets/team/cutscenes/characters/tob_doente.png` e a imagem da
+clínica foram copiados das artes da equipe sem alterações. As outras fases não
+foram reescritas para incluir regras médicas; a campanha apenas ganhou uma entrada.
+
+### Fase 5 — Acolhimento, adoção e encerramento
+
+A última fase segue o GDD atualizado em `/home/fbrandes/Documentos/extensao/GDDfinal.pdf`:
+a introdução contém apenas “...”, com Tob deitado e triste. O jogador inicia a
+interação, sem adicionar falas ao cachorro. Ignorar e voltar para dentro de casa
+produz o alerta literal do GDD; não conclui nem concede afeto.
+
+A caminha com mantas exige coleta na casa e rende um coração. A adoção exige
+recolher Tob na rua, entrar em casa com ele e conversar com a mãe para pedir
+“Mãe, deixa o Tob morar conosco”. Só então o caminho de dois corações é validado.
+Tob carregado acompanha visualmente a criança e é substituído pela instância
+interna ao atravessar a porta. A mãe reutiliza `adult.tscn`; a caminha é uma
+subcena nativa provisória. A pose deitado usa um recorte da spritesheet existente.
+
+O controlador `features/phase_five/phase_five.gd` possui os pré-requisitos e um
+estado `ENDING`. O fade oculta a gameplay, apresenta uma cutscene de epílogo e
+retorna ao resumo; a recompensa é emitida uma única vez, ao mostrar o resultado.
+Input permanece bloqueado durante transições. Os epílogos acrescentam narração
+para apresentar os resultados descritos no GDD; não são transcrições de falas
+originais. Os dois finais são alternativas, sem exigir pontuação mínima anterior.
+
+O motor de cutscenes ganhou `finish_button_text`, mantendo “Começar fase” como
+padrão e usando “Ver resultado” nos epílogos. Cenários e personagens continuam
+Resources separados, com arte da equipe preservada. A campanha percorre as cinco
+fases, acumula até dez corações e reinicia na fase 1 ao terminar. Executar a fase
+isoladamente reinicia somente ela. O reset limpa coleta, acolhimento, adoção,
+visibilidade dos Tobs e caminha, e reapresenta a introdução.
+
+**Limite atual:** não há salvamento
 persistente, inventário genérico ou controlador universal. As fases compartilham
 componentes concretos; suas regras e parte do ciclo de vida permanecem em
 controladores próprios. Algumas falas e posições iniciais ainda estão em scripts.
@@ -310,10 +449,15 @@ Executar a partir da raiz do projeto:
 godot --headless --editor --path . --quit
 godot --headless --path . --script tests/phase_one_smoke.gd
 godot --headless --path . --script tests/cutscene_smoke.gd
+godot --headless --path . --script tests/cutscene_artwork_smoke.gd
 godot --headless --path . --script tests/ui_feedback_smoke.gd
 godot --headless --path . --script tests/tob_smoke.gd
 godot --headless --path . --script tests/phase_two_smoke.gd
+godot --headless --path . --script tests/phase_three_smoke.gd
+godot --headless --path . --script tests/phase_four_smoke.gd
+godot --headless --path . --script tests/phase_five_smoke.gd
 godot --headless --path . --script tests/campaign_smoke.gd
+godot --headless --path . --script tests/resolution_smoke.gd
 ```
 
 Quando a sessão não permitir escrita nos diretórios pessoais do Godot, prefixar
@@ -323,7 +467,7 @@ cada comando com:
 env XDG_DATA_HOME=/tmp/eu_moro_aqui_godot_data XDG_CONFIG_HOME=/tmp/eu_moro_aqui_godot_config
 ```
 
-Testes automatizados disponíveis, verificados no desenvolvimento das duas fases:
+Testes automatizados disponíveis, verificados no desenvolvimento das cinco fases:
 
 - `phase_one_smoke.gd`: separação narrativa/gameplay, bloqueio de movimento,
   fade, colisões, ambientes inativos, importação dos potes, portas, inventário,
@@ -331,6 +475,9 @@ Testes automatizados disponíveis, verificados no desenvolvimento das duas fases
 - `cutscene_smoke.gd`: dados de outra fase, personagens, troca de fundo,
   teclado, clique no botão/fundo, proteção contra repetição e avanço duplo,
   conclusão única, replay e preview independente.
+- `cutscene_artwork_smoke.gd`: múltiplas imagens simultâneas, fundos por fala,
+  ordem das camadas, preservação/remoção, replay, alinhamento da arte da equipe
+  e cobertura integral da tela com diálogo desenhado acima da arte.
 - `ui_feedback_smoke.gd`: resolução dos estilos verde/vermelho, retorno ao
   estilo neutro e isolamento do tema compartilhado. O teste da fase também
   verifica a classificação de cada ação integrada à gameplay.
@@ -339,8 +486,21 @@ Testes automatizados disponíveis, verificados no desenvolvimento das duas fases
 - `phase_two_smoke.gd`: texto exato das quatro falas, imagem compartilhada,
   bloqueio de movimento, escolhas e orientação, alerta, janela/arremesso,
   praça/percurso/companhia/carinho, saída/retorno, recompensas e reset.
-- `campaign_smoke.gd`: passagem da fase 1 à fase 2, proteção contra duplo avanço,
+- `phase_three_smoke.gd`: quatro falas exatas e arte chuvosa, bloqueio na intro,
+  materiais obrigatórios, coleta/portas, alerta do pano, casinha e um coração,
+  acompanhamento até dentro de casa e dois corações, seis corações no HUD,
+  recompensa única, reset e cenas independentes.
+- `phase_four_smoke.gd`: texto e arte da intro, uivo, água, pré-requisitos de adulto
+  e orientação profissional, clínica e avaliação, recompensas únicas, reset,
+  oito corações e cenas independentes.
+- `phase_five_smoke.gd`: silêncio da intro, alerta ao ignorar, coleta da caminha,
+  acolhimento, pré-requisitos da mãe, epílogos, recompensa única, resumo, reset
+  e dez corações na resolução-base.
+- `campaign_smoke.gd`: passagem pelas fases 1 a 5, proteção contra duplo avanço,
   afeto acumulado e reinício completo do jogo.
+- `resolution_smoke.gd`: viewport/janela 1024 × 512, geometria do HUD e das
+  mensagens/escolhas, cutscenes, enquadramento das interações, limites inferiores
+  de movimento e ativação das câmeras de preview somente em cenas isoladas.
 
 Esses testes não verificam a qualidade visual do recorte ou a composição da
 tela. **A inspeção gráfica das últimas mudanças ficou pendente nesta sessão.**
